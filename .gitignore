@@ -1,0 +1,30 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# firebase
+.firebase
+/emulator_data
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+/out
+
+# misc
+.DS_Store
+.env
+public/config/version.json
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+psiturkit/*_turk
+.firebase
