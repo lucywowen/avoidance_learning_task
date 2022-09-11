@@ -1,9 +1,9 @@
 {
-  "name": "honeycomb",
-  "description": "all-in-one task starter app with jsPsych + React + Electron + psiturk ",
+  "name": "avoidance_learning_task",
+  "description": "avoidance learning task set up with honeycomb ",
   "author": {
-    "name": "Brown CCV",
-    "email": "ccv-bot@brown.edu",
+    "name": "Lucy",
+    "email": "lucy_owen1@brown.edu",
     "url": "ccv.brown.edu"
   },
   "version": "2.3.1",
@@ -11,14 +11,10 @@
   "private": true,
   "main": "public/electron.js",
   "homepage": ".",
-  "repository": "https://github.com/brown-ccv/honeycomb",
+  "repository": "https://github.com/lucywowen/avoidance_learning_task.git",
   "dependencies": {
     "@brown-ccv/behavioral-task-trials": "^2.0.0",
     "@fortawesome/fontawesome-free": "^5.9.0",
-    "@jspsych/plugin-html-button-response": "^1.1.1",
-    "@jspsych/plugin-html-keyboard-response": "^1.1.1",
-    "@jspsych/plugin-image-keyboard-response": "^1.1.1",
-    "@jspsych/plugin-survey-multi-select": "^1.1.1",
     "bootstrap": "^5.2.0-beta1",
     "electron-log": "^4.4.8",
     "electron-squirrel-startup": "^1.0.0",
@@ -28,6 +24,11 @@
     "fs-extra": "^8.1.0",
     "jquery": "^3.4.1",
     "jspsych": "^7.2.3",
+    "@jspsych/plugin-html-keyboard-response": "^1.1.1",
+    "@jspsych/plugin-image-keyboard-response": "^1.1.1",
+    "@jspsych/plugin-call-function": "^1",
+    "@jspsych/plugin-instructions": "^1",
+    "@jspsych/plugin-fullscreen": "^1.1.1",
     "lodash": "^4.17.19",
     "popper.js": "^1.16.0",
     "react": "^16.8.6",
@@ -115,10 +116,6 @@
     ]
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.64",
-    "@electron-forge/maker-deb": "^6.0.0-beta.64",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.64",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
     "babel-plugin-macros": "^2.6.1",
     "chai": "^4.2.0",
     "concurrently": "^4.1.2",
@@ -126,10 +123,14 @@
     "cz-conventional-changelog": "^3.2.0",
     "dotenv": "^8.2.0",
     "dotenv-cli": "^4.0.0",
-    "electron": "19.0.8",
-    "firebase-admin": "^11.0.1",
     "firebase-tools": "^11.0.1",
-    "require-context.macro": "^1.1.1"
+    "firebase-admin": "^11.0.1",
+    "require-context.macro": "^1.1.1",
+    "@electron-forge/cli": "^6.0.0-beta.64",
+    "@electron-forge/maker-deb": "^6.0.0-beta.64",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.64",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
+    "electron": "19.0.8"
   },
   "babel": {
     "plugins": [
