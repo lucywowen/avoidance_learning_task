@@ -30,6 +30,7 @@ function buildTimeline(jsPsych) {
       </div>`
     };
   timeline.push(instructions);
+
   
 
   var blue_trial = {
