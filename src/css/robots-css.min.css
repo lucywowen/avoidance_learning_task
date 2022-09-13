@@ -1,0 +1,430 @@
+@import url("https://fonts.googleapis.com/css?family=Orbitron|Quicksand:500");
+@font-face { font-family: Agathodaimon; src: url('agathoda.ttf'); }
+:root {
+  --height: 600px;
+  --width: 600px;
+}
+.wrap {
+  /* two-step container position */
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+
+  /* two-step container size */
+  height: 90vh;
+  max-height: 700px;
+  min-height: 400px;
+
+  width: 90vw;
+  max-width: 1000px;
+  min-width: 600px;
+
+  /* two-step container border */
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+/* Starry sky background */
+.landscape-sky {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.landscape-sky[color='forrest_1'] {
+  background: url(../img/forrest_1.jpg) repeat top center;
+}
+
+.landscape-sky[color='forrest_2'] {
+  background: url(../img/forrest_2.jpg) repeat top center;
+}
+
+.landscape-sky[color='forrest_3'] {
+  background: url(../img/forrest_3.jpg) repeat top center;
+}
+
+.landscape-sky[color='forrest_4'] {
+  background: url(../img/forrest_4.jpg) repeat top center;
+}
+
+.landscape-sky[color='desert_1'] {
+  background: url(../img/desert_1.jpg) repeat top center;
+}
+
+.landscape-sky[color='desert_2'] {
+  background: url(../img/desert_2.jpg) repeat top center;
+}
+
+.landscape-sky[color='desert_3'] {
+  background: url(../img/desert_3.jpg) repeat top center;
+}
+
+.landscape-sky[color='desert_4'] {
+  background: url(../img/desert_4.jpg) repeat top center;
+}
+
+
+.eye[outcome='win'] {
+  height: 2.0vh;
+  width: 2.0vh;
+  -webkit-transform: translate(-50%, -0%);
+  transform: translate(-50%, -0%);
+  border-radius: 50%;
+  background: black;
+  box-shadow: 0px -3px #01579b;
+}
+.eye[outcome='lose'] {
+  height: 1.6vh;
+  width: 2.1vh;
+  border-radius: 4px 4px 0px 0px;
+  background: #A41919;
+  -webkit-transform: translate(-50%, -50%) rotate(135deg);
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+/* ---------------------------------- */
+/* Instructions CSS                   */
+/* ---------------------------------- */
+
+.instructions-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 20%;
+  background: white;
+  border: 0.5vh solid black;
+  border-radius: 12px;
+}
+.instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 95%;
+}
+.instructions p {
+  font-size: 1.6vh;
+  line-height: 2.6vh;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+.instructions br {
+  font-size: 0vh;
+  line-height: 0vh;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+.wrap .jspsych-instructions-nav {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 10px 0px;
+}
+.wrap .jspsych-instructions-nav .jspsych-btn {
+  padding: 4px 8px;
+  font-size: 1.4vh;
+}
+.wrap .jspsych-instructions-nav .jspsych-btn:focus {
+  outline: none;
+}
+
+/* ---------------------------------- */
+/* Objects CSS                        */
+/* ---------------------------------- */
+
+
+.platform {
+  position: absolute;
+  width:  12vw;
+  height: 6vw;
+  margin-left: -6vw;
+  margin-top: -3vw;
+  background: #2A3439;
+  border-radius: 4vw;
+  border-bottom: 1vh solid #1F262A;
+  transform: perspective(200px) rotateX(30deg);
+}
+.platform[side='left'] {
+  top: 85%;
+  left: 30%;
+}
+.platform[side='right'] {
+  top: 85%;
+  left: 70%;
+}
+
+.ring {
+  position: absolute;
+  width:  12vw;
+  height: 6vw;
+  margin-left: -6vw;
+  margin-top: -3vw;
+  border: 0px solid white;
+  border-radius: 8vw;
+  transform: perspective(200px) rotateX(30deg);
+}
+.ring[side='left'] {
+  top: 85%;
+  left: 30%;
+}
+.ring[side='right'] {
+  top: 85%;
+  left: 70%;
+}
+.ring[status='chosen'] {
+  background: #2A3439;
+  border: 3px solid white;
+  margin-left: calc(-6vw + -1px);
+  margin-top: calc(-3vw + -1px);
+}
+
+.screen {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  height: 15vh;
+  width: 20vh;
+  margin-left: -11vh;
+  margin-top: -10vh;
+  background: white;
+  border: 0.6vh solid #333;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 2px #000000;
+  box-shadow:        inset 0 0 2px #000000;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 1px 1px 1px #404040;
+}
+.screen[side='left'] {
+  top: 40%;
+  left: 30%;
+}
+.screen[side='right'] {
+  top: 40%;
+  left: 70%;
+}
+.screen .screen-msg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Orbitron", sans-serif, sans-serif;
+  font-size: 6vh;
+}
+.screen .screen-msg[outcome='win'] {
+  color: #01579b;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+.screen .screen-msg[outcome='lose'] {
+  color: #A41919;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+.screen .screen-msg[outcome='zero'] {
+  color: #303030;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* ---------------------------------- */
+/* Robot CSS                          */
+/* ---------------------------------- */
+
+.robot {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  margin-left: -20vw;
+  margin-top: -10vw;
+  animation: float 2.0s infinite linear;
+}
+.robot[side='left'] {
+  left: 30%;
+  top: 70%;
+}
+.robot[side='right'] {
+  left: 70%;
+  top: 70%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0vh); }
+  50% { transform: translateY(0.2vh); }
+}
+.head {
+  position: relative;
+  margin: 0 auto;
+  height: 15%;
+  width: 15%;
+  background-color: #a9a9ad;
+  border-radius: 24px 24px 12px 12px;
+  border-bottom: 1px solid #98989B;
+}
+.head[status='chosen'] {
+  border: 3px solid white;
+}
+.visor {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 10%;
+  width: 80%;
+  background: #303030;
+  border: 3px solid black;
+  border-radius: 24px 24px 12px 12px;
+}
+.visor[status='chosen'] {
+  background: #303030;
+  border: 3px solid white;
+}
+.eye {
+  position: absolute;
+}
+.eye[side='left'] {
+  top: 50%;
+  left: 25%;
+}
+.eye[side='right'] {
+  top: 50%;
+  left: 75%;
+}
+
+.eye[outcome='win'] {
+  height: 1.3vh;
+  width: 2.1vh;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #01579b;
+  border-radius: 24px 24px 24px 24px;
+}
+.eye[outcome='lose'] {
+  height: 1.3vh;
+  width: 2.1vh;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #A41919;
+  border-radius: 24px 24px 24px 24px;
+}
+.eye[outcome='zero'] {
+  height: 1.3vh;
+  width: 2.1vh;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #303030;
+  border-radius: 24px 24px 24px 24px;
+}
+.torso {
+  position: relative;
+  margin: 0 auto;
+  width: 15%;
+  border-top: 12vh solid #a9a9ad;
+  border-left: 1vw solid transparent;
+  border-right: 1vw solid transparent;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.torso:after {
+  position: absolute;
+  left: 0%;
+  top: 0px;
+  height: 2px;
+  background: #606060;
+  width: 100%;
+  border-bottom-left-radius: 32px 8px;
+  border-bottom-right-radius: 32px 8px;
+  content:' ';
+}
+.torso .rune {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-10vh);
+  transform: translateX(-50%) translateY(-7vh);
+  font-family: "Agathodaimon", sans-serif, sans-serif;
+  font-size: 8vh;
+}
+.torso .rune[outcome='win'] {
+  color: #01579b;
+}
+.torso .rune[outcome='lose'] {
+  color: #A41919;
+}
+.torso .rune[outcome='zero'] {
+  color: #303030;
+}
+
+.shado {
+  position: relative;
+  margin: 0 auto;
+  height: 15%;
+  width: 15%;
+  background: black;
+  background-color: black;
+  border-radius: 50%;
+  opacity: 0.5;
+  transform: perspective(200px) rotateX(80deg);
+  animation: expand 2.0s infinite linear;
+}
+@keyframes expand {
+  0%, 100% { transform: perspective(200px) rotateX(80deg) scale(1); }
+  50% { transform: perspective(200px) rotateX(80deg) scale(1.05); }
+}
+
+/* ---------------------------------- */
+/* Comprehension check                */
+/* ---------------------------------- */
+
+.comprehension-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  width: 73.5vw;
+  height: 42vw;
+  background: #ffffff;
+  border: 2px solid black;
+  border-radius: 12px;
+  font-size: 1.5vw;
+  line-height: 1.5em;
+}
+.comprehension-box .jspsych-survey-multi-choice-preamble h4 {
+  font-size: 1.75vw;
+  margin-block-start: 1em;
+  margin-block-end: 1.2em
+}
+.comprehension-box .jspsych-survey-multi-choice-question {
+  margin-top: 0em;
+  margin-bottom: 1.0em;
+  text-align: left;
+  padding-left: 2em;
+}
+.comprehension-box .jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {
+  text-align: left;
+  margin: 0em 0em 0em 0em
+}
+.comprehension-box .jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {
+  display: inline-block;
+  margin: 0.33em 1em 0em 1em;
+}
+.comprehension-box .jspsych-survey-multi-choice-option input[type='radio'] {
+  margin-right: 0.5em;
+  width: 14px;
+  height: 14px;
+}
+.comprehension-box input[type='submit'] {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: calc(1.75 * 0.75vw);
+  padding: 4px 8px;
+}
