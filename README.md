@@ -63,22 +63,30 @@ cd avoidance_learning_task
 git pull
 ```
 
-3. Run the task 
+3. Install the dependencies (the -D flag installs the dev dependencies as well as the production ones)
+
+```
+npm install -D
+```
+
+4. Run the task 
 
 ```
 npm run dev:clinic
 ```
 
-4. Use whatever participant name you want, but try to use the same study ID across subjects. For example, use 'TEST' for study ID if you're just debugging and use 'STUDY'.  
+5. Use whatever participant name you want, but try to use the same study ID across subjects. For example, use 'TEST' for study ID if you're just debugging and use 'STUDY'.  
 
-5. If you need to change anything, please use a different branch!!
+6. If you need to change anything, please use a different branch!!
 
 ```
 git checkout -b <new branch name>
 ```
 
-6. Push any changes on the different branch
+7. Push any changes on the different branch
 
 ```
 git push
 ```
+
+8. Hope for no merge issues :) 

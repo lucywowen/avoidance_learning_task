@@ -1,49 +1,47 @@
+import { ParameterType } from "jspsych";
 
-var jsPsychProbe = (function (jsPsych) {
-  "use strict";
-
-  const info = {
+const info = {
     name: 'probe',
     parameters: {
       symbol_L: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Symbol (left)',
         default: null,
         description: 'Key code of corresponding symbol for left knight'
       },
       symbol_R: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Symbol (right)',
         default: null,
         description: 'Key code of corresponding symbol for right knight'
       },
       outcome_L: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (left)',
         default: null,
         description: 'Outcome for left knight.'
       },
       outcome_R: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (right)',
         default: null,
         description: 'Outcome for right knight.'
       },
       choices: {
-        type: jsPsych.ParameterType.KEYCODE,
+        type: ParameterType.KEYCODE,
         array: true,
         pretty_name: 'Choices',
         default: ['arrowleft','arrowright'],
         description: 'The keys the subject is allowed to press to respond to the stimulus.'
       },
       choice_duration: {
-        type: jsPsych.ParameterType.INT,
+        type: ParameterType.INT,
         pretty_name: 'Trial duration',
         default: 10000,
         description: 'Duration of choice selection phase.'
       },
       robot_duration: {
-        type: jsPsych.ParameterType.INT,
+        type: ParameterType.INT,
         pretty_name: 'Trial duration',
         default: 500,
         description: 'Duration of choice indication phase.'
@@ -216,7 +214,5 @@ class ProbePlugin {
 
   };
 }
-ProbePlugin.info = info;
-return ProbePlugin;
+export default ProbePlugin;
 
-})(jsPsychModule);
