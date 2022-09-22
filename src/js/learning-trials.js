@@ -1,87 +1,86 @@
+import { ParameterType } from "jspsych";
+import { images } from '../lib/utils';
 
-var jsPsychLearning = (function (jsPsych) {
-  "use strict";
-
-  const info = {
+const info = {
     name: 'learning-trials',
     parameters: {
       symbol_L: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Symbol (left)',
         default: '',
         description: 'Key code of corresponding symbol for left robot'
       },
       symbol_R: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Symbol (right)',
         default: '',
         description: 'Key code of corresponding symbol for right robot'
       },
       outcome_L: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (left)',
         description: 'Outcome for left robot.'
       },
       outcome_R: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (right)',
         description: 'Outcome for right robot.'
       },
       correct: {
-        type: jsPsych.ParameterType.KEYCODE,
+        type: ParameterType.KEYCODE,
         pretty_name: 'Correct',
         description: 'The key corresponding to the better robot.'
       },
       counterfactual: {
-        type: jsPsych.ParameterType.BOOLEAN,
+        type: ParameterType.BOOLEAN,
         pretty_name: 'Counterfactual feedback',
         default: false,
         description: 'Present feedback for both chosen and unchosen stimuli.'
       },
       choices: {
-        type: jsPsych.ParameterType.KEYCODE,
+        type: ParameterType.KEYCODE,
         array: true,
         pretty_name: 'Choices',
         default: ['arrowleft','arrowright'],
         description: 'The keys the subject is allowed to press to respond to the stimulus.'
       },
       context: {
-        type: jsPsych.ParameterType.STRING,
+        type:  ParameterType.STRING,
         pretty_name: 'Condition',
         description: 'Win or lose condition'
       },
       choice_duration: {
-        type: jsPsych.ParameterType.INT,
+        type:  ParameterType.INT,
         pretty_name: 'Trial duration',
         default: 10000,
         description: 'Duration of choice selection phase.'
       },
       robot_duration: {
-        type: jsPsych.ParameterType.INT,
+        type: ParameterType.INT,
         pretty_name: 'Robot duration',
         default: 500,
         description: 'Duration of choice indication phase.'
       },
       feedback_duration: {
-        type: jsPsych.ParameterType.INT,
+        type:  ParameterType.INT,
         pretty_name: 'Feedback duration',
         default: 2000,
         description: 'Duration of outcome phase.'
       },
       feedback_win: {
-        type: jsPsych.ParameterType.STRING,
+        type:  ParameterType.STRING,
         pretty_name: 'Feedback (win)',
         default: "+10",
         description: 'Feedback for win outcome.'
       },
       feedback_zero: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (neutral)',
         default: "+0",
         description: 'Feedback for neutral outcome.'
       },
       feedback_lose: {
-        type: jsPsych.ParameterType.STRING,
+        type: ParameterType.STRING,
         pretty_name: 'Feedback (lose)',
         default: "-10",
         description: 'Feedback for lose outcome.'
@@ -107,6 +106,17 @@ class LearningPlugin {
     //---------------------------------------//
 
 
+  var background_images = { 
+    forrest_1: images['forrest_1.jpg'],
+    forrest_2: images['forrest_2.jpg'], 
+    forrest_3: images['forrest_3.jpg'],
+    forrest_4: images['forrest_4.jpg'],
+    desert_1: images['desert_1.jpg'],
+    desert_2: images['desert_2.jpg'],
+    desert_3: images['desert_3.jpg'], 
+    desert_4: images['desert_4.jpg'],
+  }
+
     var new_html = '';
 
     // Insert CSS (window animation).
@@ -128,7 +138,7 @@ class LearningPlugin {
 
 
     // Draw background.
-    new_html += `<div class="landscape-sky" color="${trial.context}"</div>`;
+    new_html += `<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>`;
 
     // Draw screens
     new_html += '<div class="screen" side="left"><div class="screen-msg" id="screenL"></div></div>';
@@ -341,12 +351,12 @@ class LearningPlugin {
     // end trial if choice_duration is set
     if (trial.choice_duration !== null) {
       this.jsPsych.pluginAPI.setTimeout(function() {
-        missed_response();
+        missed_response()
       }, trial.choice_duration);
     }
-  };
+  }
 }
   LearningPlugin.info = info;
-  return LearningPlugin;
 
-})(jsPsychModule);
+  export default LearningPlugin;
+
