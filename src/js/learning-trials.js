@@ -27,18 +27,18 @@ const info = {
         description: 'Outcome for right robot.'
       },
       correct: {
-        type: ParameterType.KEYCODE,
+        type: ParameterType.KEY,
         pretty_name: 'Correct',
         description: 'The key corresponding to the better robot.'
       },
       counterfactual: {
-        type: ParameterType.BOOLEAN,
+        type: ParameterType.BOOL,
         pretty_name: 'Counterfactual feedback',
         default: false,
         description: 'Present feedback for both chosen and unchosen stimuli.'
       },
       choices: {
-        type: ParameterType.KEYCODE,
+        type: ParameterType.KEY,
         array: true,
         pretty_name: 'Choices',
         default: ['arrowleft','arrowright'],
