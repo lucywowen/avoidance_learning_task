@@ -352,10 +352,10 @@ function buildTimeline(jsPsych) {
 
   // Iteratively define trials
   // for (i = 0; i < 8; i++) {
-  for (var i = 0; i < 2; i++) {
+  for (i = 0; i < 2; i++) {
 
     // for (j = 0; j < 8; j++) {
-    for (var j = 0; j < 2; j++) {
+    for (j = 0; j < 2; j++) {
 
       if (i != j) {
 
@@ -408,7 +408,7 @@ function buildTimeline(jsPsych) {
 
     }
 
-  };
+  }
 
   // Shuffle trials.
   probe_phase_1 = jsPsych.randomization.repeat(probe_phase_1, 1);
