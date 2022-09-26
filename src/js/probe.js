@@ -212,7 +212,8 @@ class ProbePlugin {
       }, trial.choice_duration);
     }
 
-  };
+  }
 }
-export default ProbePlugin;
+ProbePlugin.info = info;
 
+export default ProbePlugin;
