@@ -342,12 +342,17 @@ trial(display_element, trial) {
 
   var end_trial = () => {
 
+    if (typeof trial.stimulus == 'undefined') {
+      trial.stimulus='practice';
+    }
+
     // gather the data to store for the trial
     var trial_data = {
       "rt": response.rt,
       "stimulus": trial.stimulus,
       "key_press": response.key
     };
+
 
     // clear the display
     display_element.innerHTML = '';
