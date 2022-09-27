@@ -330,7 +330,7 @@ trial(display_element, trial) {
     }
 
     // Reinitialize keyboardListener.
-    var keyboardListener = this.jsPsych.pluginAPI.getKeyboardResponse({
+    this.jsPsych.pluginAPI.getKeyboardResponse({
       callback_function: after_response,
       valid_responses: trial.choices,
       rt_method: 'performance',
