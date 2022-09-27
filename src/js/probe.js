@@ -177,6 +177,9 @@ class ProbePlugin {
 
     var end_trial = () => {
 
+      if (typeof trial.stimulus == 'undefined') {
+        trial.stimulus='probe';
+      }
       // gather the data to store for the trial
       var trial_data = {
         "symbol_L": trial.symbol_L,
