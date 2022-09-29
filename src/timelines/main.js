@@ -47,16 +47,15 @@ function buildTimeline(jsPsych) {
   // // Define learning phase instructions.
   // //---------------------------------------//
   var instructions_01 = {
-    type: jsPsychInstructions,
+    type: jsPsychMyInstructions,
     pages: [
-      "We are now starting the experiment.<br><br>Use the buttons below (or the left/right arrow keys) to navigate the instructions.",
+      "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
       "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
       "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
-      "You'll also pick your team of knights from different places. <br>Some of places will have knights that are good and will give you more points and some places will have knights are bad and will take away points.",
+      "You'll also pick your team of knights from different places, either the desert or forrest.",
       "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
       "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
       "Some knights are better than others. Some will give you more points than others and some will lose you less points that others.",
-      "Sometimes you'll know the points from the unchosen knights, but sometimes you won't know.",
       "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
       "<b>HINT:</b> Pay attention to the symbols and the results of each test."
     ],

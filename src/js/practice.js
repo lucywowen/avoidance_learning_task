@@ -149,7 +149,7 @@ trial(display_element, trial) {
   // Draw left robot.
   new_html += '<div class="robot" side="left">';
   new_html += '<div class="head">';
-  new_html += '<div class="visor"></div>';
+  new_html += '<div class="visor", id="visorL"></div>';
   new_html += '<div class="eye" id="eyeLL" side="left"></div>';
   new_html += '<div class="eye" id="eyeLR" side="right"></div>';
   new_html += '</div>';
@@ -164,7 +164,7 @@ trial(display_element, trial) {
   // Draw right robot.
   new_html += '<div class="robot" side="right">';
   new_html += '<div class="head">';
-  new_html += '<div class="visor"></div>';
+  new_html += '<div class="visor", id="visorR"></div>';
   new_html += '<div class="eye" id="eyeRL" side="left"></div>';
   new_html += '<div class="eye" id="eyeRR" side="right"></div>';
   new_html += '</div>';
@@ -219,6 +219,13 @@ trial(display_element, trial) {
     } else {
       display_element.querySelector('#ringR').setAttribute('status', 'chosen');
     }
+
+    // Visually indicate chosen robot.
+    if (response.key == 'arrowleft') {
+      display_element.querySelector('#visorL').setAttribute('status', 'chosen');
+    } else {
+      display_element.querySelector('#visorR').setAttribute('status', 'chosen');
+    }  
 
     this.jsPsych.pluginAPI.setTimeout(function() {
       present_feedback();
@@ -300,6 +307,7 @@ trial(display_element, trial) {
     display_element.querySelector('#eyeLL').setAttribute('outcome', '');
     display_element.querySelector('#eyeLR').setAttribute('outcome', '');
     display_element.querySelector('#ringL').setAttribute('status', '');
+    display_element.querySelector('#visorL').setAttribute('status', '');
 
     // Reset right side HTML.
     display_element.querySelector('#screenR').innerHTML = '';
@@ -308,6 +316,7 @@ trial(display_element, trial) {
     display_element.querySelector('#eyeRL').setAttribute('outcome', '');
     display_element.querySelector('#eyeRR').setAttribute('outcome', '');
     display_element.querySelector('#ringR').setAttribute('status', '');
+    display_element.querySelector('#visorR').setAttribute('status', '');
 
     // Randomize robot sides.
     if (trial.randomize && this.jsPsych.randomization.repeat([0,1],1)[0] == 1 ) {

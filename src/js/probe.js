@@ -95,7 +95,7 @@ class ProbePlugin {
     // Draw left robot.
     new_html += '<div class="robot" side="left">';
     new_html += '<div class="head">';
-    new_html += '<div class="visor"></div>';
+    new_html += '<div class="visor", id="visorL"></div>';
     new_html += '<div class="eye" id="eyeLL" side="left"></div>';
     new_html += '<div class="eye" id="eyeLR" side="right"></div>';
     new_html += '</div>';
@@ -110,7 +110,7 @@ class ProbePlugin {
     // Draw right robot.
     new_html += '<div class="robot" side="right">';
     new_html += '<div class="head">';
-    new_html += '<div class="visor"></div>';
+    new_html += '<div class="visor", id="visorR"></div>';
     new_html += '<div class="eye" id="eyeRL" side="left"></div>';
     new_html += '<div class="eye" id="eyeRR" side="right"></div>';
     new_html += '</div>';
@@ -151,6 +151,13 @@ class ProbePlugin {
         display_element.querySelector('#ringR').setAttribute('status', 'chosen');
       }
 
+      // Visually indicate chosen robot.
+      if (response.key == 'arrowleft') {
+        display_element.querySelector('#visorL').setAttribute('status', 'chosen');
+      } else {
+        display_element.querySelector('#visorR').setAttribute('status', 'chosen');
+      }      
+      
       this.jsPsych.pluginAPI.setTimeout(function() {
         end_trial();
       }, trial.robot_duration);
