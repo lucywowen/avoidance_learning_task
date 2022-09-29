@@ -213,14 +213,6 @@ class LearningPlugin {
         display_element.querySelector('#ringR').setAttribute('status', 'chosen');
       }
       
-      
-      // // Visually indicate chosen robot.
-      // if (response.key == 'arrowleft') {
-      //   display_element.querySelector('#headL').setAttribute('status', 'chosen');
-      // } else {
-      //   display_element.querySelector('#headR').setAttribute('status', 'chosen');
-      // }
-
       // Visually indicate chosen robot.
       if (response.key == 'arrowleft') {
         display_element.querySelector('#visorL').setAttribute('status', 'chosen');
