@@ -1,4 +1,5 @@
 import { ParameterType } from "jspsych";
+import { images } from '../lib/utils';
 
 const info = {
     name: 'probe',
@@ -26,6 +27,11 @@ const info = {
         pretty_name: 'Feedback (right)',
         default: null,
         description: 'Outcome for right knight.'
+      },
+      context: {
+        type:  ParameterType.STRING,
+        pretty_name: 'Condition',
+        description: 'Win or lose condition'
       },
       choices: {
         type: ParameterType.KEYCODE,
@@ -66,6 +72,17 @@ class ProbePlugin {
     // Define HTML.
     //---------------------------------------//
 
+    var background_images = { 
+      forrest_1: images['forrest_1.jpg'],
+      forrest_2: images['forrest_2.jpg'], 
+      forrest_3: images['forrest_3.jpg'],
+      forrest_4: images['forrest_4.jpg'],
+      desert_1: images['desert_1.jpg'],
+      desert_2: images['desert_2.jpg'],
+      desert_3: images['desert_3.jpg'], 
+      desert_4: images['desert_4.jpg'],
+    }
+  
     // Initialize HTML.
     var new_html = `<style>
     body {
@@ -80,7 +97,11 @@ class ProbePlugin {
 
     // Draw task
     new_html += '<div class="wrap">';
-    new_html += '<div class="floor"></div>'
+
+    // Draw background.
+
+    new_html += `<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>`;
+
 
     // Draw screens
     new_html += '<div class="screen" side="left"><div class="screen-msg" id="screenL"></div></div>';
@@ -157,7 +178,7 @@ class ProbePlugin {
       } else {
         display_element.querySelector('#visorR').setAttribute('status', 'chosen');
       }      
-      
+
       this.jsPsych.pluginAPI.setTimeout(function() {
         end_trial();
       }, trial.robot_duration);
