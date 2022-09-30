@@ -27,16 +27,16 @@ function buildTimeline(jsPsych) {
   // Shuffle symbols.
   symbol_array = jsPsych.randomization.repeat(symbol_array, 1);
 
-  // var context_array = ['forrest_1', 'forrest_2', 'forrest_3', 'desert_1', 'desert_2', 'desert_3']
+  // Define the contexts.
   var practice_array = ['forrest_1', 'desert_1']
   var learn_1_array = ['forrest_2', 'desert_4']
   var learn_2_array = ['forrest_4', 'desert_3']
 
-  // var context_array_forrest = ['forrest_1', 'forrest_2', 'forrest_3']
-  // var context_array_desert = ['desert_1', 'desert_2', 'desert_3']
-
+  // Randomize the contexts.
   var context_array = jsPsych.randomization.repeat(practice_array, 1);
+  context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_1_array, 1));
+  context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_2_array, 1));
 
   // Define missed repsonses count.
@@ -54,8 +54,9 @@ function buildTimeline(jsPsych) {
       "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
       "You'll also pick your team of knights from different places, either the desert or forrest.",
       "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
+      "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
       "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
-      "Some knights are better than others. Some will give you more points than others and some will lose you less points that others.",
+      "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
       "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
       "<b>HINT:</b> Pay attention to the symbols and the results of each test."
     ],
@@ -99,8 +100,8 @@ function buildTimeline(jsPsych) {
   const instructions_03 = {
     type: jsPsychMyInstructions,
     pages: [
-      "During the task, there will be many knights to test.<br>Remember to pay close attention to their symbols.",
-      "Your job is to try to select the best knight on each trial.<br>Even though you will learn the test results for both knights,<br>you will only earn points for the knight you test.",
+      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
+      "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
       "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
       "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
       "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
@@ -207,7 +208,7 @@ function buildTimeline(jsPsych) {
 
   // Iteratively define trials
   // for (i = 0; i < 12; i++) {
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < 2; i++) {
 
 
     // Initialize (temporary) trial array.
@@ -220,11 +221,11 @@ function buildTimeline(jsPsych) {
 
       if (j % 2 == 0) { 
         val = 'win'; 
-        color = context_array[2];
+        color = context_array[3];
       }
       else { 
         val = 'lose'; 
-        color = context_array[3];
+        color = context_array[4];
       }
 
       // if (val = 'win') { var color = 'reward'; }
@@ -350,65 +351,68 @@ function buildTimeline(jsPsych) {
 
   // Initialize phase array.
   var probe_phase_1 = [];
-
   // Iteratively define trials
   // for (i = 0; i < 8; i++) {
-  for (var p = 0; p < 2; p++) {
+  for (var p = 0; p < 4; p++) {
 
     // for (j = 0; j < 8; j++) {
-    for (var q = 0; q < 2; q++) {
+    for (var q = 0; q < 4; q++) {
 
-      if (p != q) {
+      for (var c = 0; c < 3; c++) {
 
-        // Append trial.
-        var probe = {
-          type: jsPsychProbe,
-          symbol_L: symbol_array[p],
-          symbol_R: symbol_array[q],
-          choices: ['arrowleft','arrowright'],
-          data: {block: 1},
-          on_finish: function(data) {
+        if (p != q) {
 
-            // Evaluate missing data
-            if ( data.rt == null ) {
+          // Append trial.
+          var probe = {
+            type: jsPsychProbe,
+            symbol_L: symbol_array[p],
+            symbol_R: symbol_array[q],
+            context: context_array[4-c],
+            choices: ['arrowleft','arrowright'],
+            data: {block: 1},
+            on_finish: function(data) {
 
-              // Set missing data to true.
-              data.missing = true;
+              // Evaluate missing data
+              if ( data.rt == null ) {
 
-              // Increment counter. Check if experiment should end.
-              missed_responses++;
-              if (missed_responses >= missed_threshold) {
-                low_quality = true;
-                jsPsych.endExperiment();
+                // Set missing data to true.
+                data.missing = true;
+
+                // Increment counter. Check if experiment should end.
+                missed_responses++;
+                if (missed_responses >= missed_threshold) {
+                  low_quality = true;
+                  jsPsych.endExperiment();
+                }
+
+              } else {
+
+                // Set missing data to false.
+                data.missing = false;
+
               }
-
-            } else {
-
-              // Set missing data to false.
-              data.missing = false;
 
             }
 
           }
 
-        }
-
-        // Define looping node.
-        const probe_node = {
-          timeline: [probe],
-          loop_function: function(data) {
-            return data.values()[0].missing;
+          // Define looping node.
+          const probe_node = {
+            timeline: [probe],
+            loop_function: function(data) {
+              return data.values()[0].missing;
+            }
           }
-        }
 
-        // Add trials twice.
-        probe_phase_1.push(probe_node);
-        probe_phase_1.push(probe_node);
+          // Add trials twice.
+          probe_phase_1.push(probe_node);
+          probe_phase_1.push(probe_node);
+
+        }
 
       }
 
     }
-
   }
 
   // Shuffle trials.
@@ -438,17 +442,17 @@ function buildTimeline(jsPsych) {
     const trials = [];
 
     // Iterate over unique pairs.
-    for (var m = 0; m < 4; m++) {
+    for (var m = 4; m < 8; m++) {
     // for (j = 4; j < 8; j++) {
 
         // Define metadata.
         if (m % 2 == 0) { 
           val = 'win'; 
-          color = context_array[4];
+          color = context_array[6];
         }
         else { 
           val = 'lose'; 
-          color = context_array[5];
+          color = context_array[7];
         }
 
       // // Define metadata.
@@ -468,8 +472,8 @@ function buildTimeline(jsPsych) {
       // Append trial (LR).
       LR = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*j+0],
-        symbol_R: symbol_array[2*j+1],
+        symbol_L: symbol_array[2*m+0],
+        symbol_R: symbol_array[2*m+1],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
         counterfactual: cf,
@@ -515,8 +519,8 @@ function buildTimeline(jsPsych) {
       // Append trial (RL).
       RL = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*j+1],
-        symbol_R: symbol_array[2*j+0],
+        symbol_L: symbol_array[2*m+1],
+        symbol_R: symbol_array[2*m+0],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
         counterfactual: cf,
@@ -579,47 +583,55 @@ function buildTimeline(jsPsych) {
   var probe_phase_2 = [];
 
   // Iteratively define trials
-  // for (i = 0; i < 8; i++) {
-  for (var r = 0; r < 2; r++) {
 
-    // for (j = 0; j < 8; j++) {
-    for (var s = 0; s < 2; s++) {
+  // // Iteratively define trials
+  // for (r = 8; r < 16; r++) {
 
-      if (r != s) {
+  //   for (s = 8; s < 16; s++) {
 
-        // Append trial.
-        probe = {
-          type: jsPsychProbe,
-          symbol_L: symbol_array[r],
-          symbol_R: symbol_array[s],
-          choices: ['arrowleft','arrowright'],
-          data: {block: 2},
-          on_finish: function(data) {
+  // Iteratively define trials
+  for (var r = 8; r < 10; r++) {
 
-            // Evaluate missing data
-            if ( data.rt == null ) {
+    for (var s = 8; s < 10; s++) {
 
-              // Set missing data to true.
-              data.missing = true;
+      for (var d = 0; d < 3; d++) {
 
-              // Increment counter. Check if experiment should end.
-              missed_responses++;
-              if (missed_responses >= missed_threshold) {
-                low_quality = true;
-                jsPsych.endExperiment();
+        if (r != s) {
+
+          // Append trial.
+          probe = {
+            type: jsPsychProbe,
+            symbol_L: symbol_array[r],
+            symbol_R: symbol_array[s],
+            context: context_array[7-d],
+            choices: ['arrowleft','arrowright'],
+            data: {block: 2},
+            on_finish: function(data) {
+
+              // Evaluate missing data
+              if ( data.rt == null ) {
+
+                // Set missing data to true.
+                data.missing = true;
+
+                // Increment counter. Check if experiment should end.
+                missed_responses++;
+                if (missed_responses >= missed_threshold) {
+                  low_quality = true;
+                  jsPsych.endExperiment();
+                }
+
+              } else {
+
+                // Set missing data to false.
+                data.missing = false;
+
               }
-
-            } else {
-
-              // Set missing data to false.
-              data.missing = false;
 
             }
 
           }
-
         }
-
         // Define looping node.
         const probe_node = {
           timeline: [probe],

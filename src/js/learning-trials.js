@@ -295,7 +295,7 @@ class LearningPlugin {
       this.jsPsych.pluginAPI.cancelAllKeyboardResponses();
 
       // Display warning message.
-      const msg = '<p style="font-size: 20px; line-height: 1.5em">You did not respond within the allotted time. Please pay more attention on the next trial.<br><br><b>Warning:</b> If you miss too many trials, we may end the exepriment early and reject your work.';
+      const msg = '<p style="font-size: 20px; line-height: 1.5em">You did not respond within the allotted time. Please pay more attention next time.<br><br><b>Warning:</b> If you miss too many times, we may end the exepriment early.';
 
       display_element.innerHTML = msg;
 
