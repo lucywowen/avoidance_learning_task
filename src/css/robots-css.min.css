@@ -120,11 +120,11 @@
 }
 .platform[side='left'] {
   top: 85%;
-  left: 30%;
+  left: 25%;
 }
 .platform[side='right'] {
   top: 85%;
-  left: 70%;
+  left: 75%;
 }
 
 .ring {
@@ -139,11 +139,11 @@
 }
 .ring[side='left'] {
   top: 85%;
-  left: 30%;
+  left: 25%;
 }
 .ring[side='right'] {
   top: 85%;
-  left: 70%;
+  left: 75%;
 }
 .ring[status='chosen'] {
   background: #2A3439;
@@ -171,11 +171,11 @@
 }
 .screen[side='left'] {
   top: 40%;
-  left: 30%;
+  left: 25%;
 }
 .screen[side='right'] {
   top: 40%;
-  left: 70%;
+  left: 75%;
 }
 .screen .screen-msg {
   position: absolute;
@@ -211,11 +211,11 @@
   animation: float 2.0s infinite linear;
 }
 .robot[side='left'] {
-  left: 30%;
+  left: 25%;
   top: 70%;
 }
 .robot[side='right'] {
-  left: 70%;
+  left: 75%;
   top: 70%;
 }
 

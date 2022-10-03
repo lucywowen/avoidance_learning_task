@@ -166,7 +166,7 @@ function buildTimeline(jsPsych) {
   var ready = {
     type: jsPsychInstructions,
     pages: [
-      "Great job! You've passed the practice",
+      "Great job! You've passed the comprehension check.",
       "Get ready to begin the experiment.<br>Press next when you're ready to start.",
     ],
   }
@@ -177,23 +177,34 @@ function buildTimeline(jsPsych) {
 
   var instructions_05 = {
     type: jsPsychInstructions,
-    pages: [
-      "That's the end of the learning phase. Great job!",
-      "In this next part, you will select which knights you would like to join your team.",
-      "As you make your choices, you will not receive any feedback after your choice.",
-      "You should still choose the knight you think is better on each trial.<br>Your choices will still contribute to your performance bonus.",
-      "Get ready to make your selections.<br><br>Choose wisely!"
-    ],
+    pages: () => {
+      return [
+        `That's the end of the learning phase. Great job! You've made ${correct_trial_count/total_trial_count}% correct`,
+        "In this next part, you will select which knights you would like to join your team.",
+        "As you make your choices, you will not receive any feedback after your choice.",
+        "You should still choose the knight you think is better on each trial.<br>Your choices will still contribute to your performance bonus.",
+        "Get ready to make your selections.<br><br>Choose wisely!"
+      ]
+    }
   }
 
   var instructions_06 = {
     type: jsPsychInstructions,
-    pages: [
-      "That's the end of the selection phase. Great job!",
-      "Take a break for a few moments and<br>click next when you are ready to continue.",
-      "Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.",
-      "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
-    ],
+
+    pages: () => {
+      return [
+        "That's the end of the selection phase. Great job!",
+        "Take a break for a few moments and<br>click next when you are ready to continue.",
+        "Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.",
+        "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
+      ]
+    }
+    // pages: [
+    //   "That's the end of the selection phase. Great job!",
+    //   "Take a break for a few moments and<br>click next when you are ready to continue.",
+    //   "Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.",
+    //   "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
+    // ],
   }
 
   // //---------------------------------------//
@@ -675,10 +686,10 @@ function buildTimeline(jsPsych) {
   // Complete screen
   var complete = {
     type: jsPsychInstructions,
-    pages: [
-      
-      "Great job! You have completed the experiment. Your accuracy was above average! "
-    ],
+    pages: () => {
+      return [
+        `Great job! You have completed the experiment. You've made ${correct_trial_count/total_trial_count}% correct`,
+    ]},
     show_clickable_nav: true,
     button_label_previous: 'Prev',
     button_label_next: 'Next',
@@ -692,7 +703,7 @@ function buildTimeline(jsPsych) {
 
   timeline = timeline.concat(fullscreen);
   timeline = timeline.concat(instructions);
-  timeline = timeline.concat(comprehension_check); // Comprehension check (implicit)
+  timeline = timeline.concat(comprehension_check); 
   timeline = timeline.concat(ready);
   timeline = timeline.concat(learning_phase_1);
   timeline = timeline.concat(instructions_05);
