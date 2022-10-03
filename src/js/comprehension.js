@@ -141,7 +141,7 @@ class ComprehensionPlugin {
     // ---------------------------------- //
 
     // Detect submit button press
-    document.querySelector('form').addEventListener('submit', function(event) {
+    document.querySelector('form').addEventListener('submit', (event) => {
       event.preventDefault();
 
       // Measure response time
@@ -160,6 +160,7 @@ class ComprehensionPlugin {
         // Store response
         responses.push(val)
 
+        console.log(val)
         // Check accuracy
         if ( correct[i] != val ) {
           num_errors++;
