@@ -1,12 +1,12 @@
 
-// import jsPsychComprehension from '../js/comprehension'
+import jsPsychComprehension from '../js/comprehension'
 import jsPsychLearning from '../js/learning-trials'
 import jsPsychMyInstructions from '../js/instructions'
 import jsPsychProbe from '../js/probe'
 import jsPsychPractice from '../js/practice'
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen'
 import jsPsychInstructions from '@jspsych/plugin-instructions'
-// import jsPsychCallFunction from '@jspsych/plugin-call-function'
+import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
 
@@ -42,6 +42,10 @@ function buildTimeline(jsPsych) {
   // Define missed repsonses count.
   var missed_threshold = 10;
   var missed_responses = 0;
+
+  // Define correct responses
+  var correct_trial_count = 0;
+  var total_trial_count = 0;
 
   // //---------------------------------------//
   // // Define learning phase instructions.
@@ -110,9 +114,9 @@ function buildTimeline(jsPsych) {
       symbol_R: " "
   }
 
-  // var comprehension = {
-  //   type: jsPsychComprehension
-  // }
+  var comprehension = {
+    type: jsPsychComprehension
+  }
 
   // Define comprehension threshold.
   var max_errors = 0;
@@ -126,7 +130,7 @@ function buildTimeline(jsPsych) {
       instructions_02,
       practice_block_02,
       instructions_03,
-      // comprehension
+      comprehension
     ],
   // }
     loop_function: function(data) {
@@ -136,6 +140,7 @@ function buildTimeline(jsPsych) {
 
       // Check if instructions should repeat.
       if (num_errors > max_errors) {
+        console.log(num_errors)
         num_loops++;
         if (num_loops >= max_loops) {
           low_quality = true;
@@ -150,13 +155,13 @@ function buildTimeline(jsPsych) {
     }
   }
 
-  // var comprehension_check = {
-  //   type: jsPsychCallFunction,
-  //   func: function(){},
-  //   on_finish: function() {
-  //     if (low_quality) { jsPsych.endExperiment(); }
-  //   }
-  // }
+  var comprehension_check = {
+    type: jsPsychCallFunction,
+    func: function(){},
+    on_finish: function() {
+      if (low_quality) { jsPsych.endExperiment(); }
+    }
+  }
 
   var ready = {
     type: jsPsychInstructions,
@@ -269,7 +274,10 @@ function buildTimeline(jsPsych) {
 
             // Set missing data to false.
             data.missing = false;
-
+            total_trial_count++;
+            if (data.accuracy == 1) {
+              correct_trial_count++;
+            }
           }
           console.log(low_quality)
         }
@@ -317,7 +325,10 @@ function buildTimeline(jsPsych) {
 
             // Set missing data to false.
             data.missing = false;
-
+            total_trial_count++;
+            if (data.accuracy == 1) {
+              correct_trial_count++;
+            }
           }
           console.log(low_quality)
         }
@@ -500,7 +511,10 @@ function buildTimeline(jsPsych) {
 
             // Set missing data to false.
             data.missing = false;
-
+            total_trial_count++;
+            if (data.accuracy == 1) {
+              correct_trial_count++;
+            }
           }
 
         }
@@ -547,7 +561,10 @@ function buildTimeline(jsPsych) {
 
             // Set missing data to false.
             data.missing = false;
-
+            total_trial_count++;
+            if (data.accuracy == 1) {
+              correct_trial_count++;
+            }
           }
 
         }
@@ -653,11 +670,14 @@ function buildTimeline(jsPsych) {
   // Shuffle trials.
   probe_phase_2 = jsPsych.randomization.repeat(probe_phase_2, 1);
 
+  correct_trial_count/total_trial_count
+  
   // Complete screen
   var complete = {
     type: jsPsychInstructions,
     pages: [
-      "Great job! You have completed the experiment."
+      
+      "Great job! You have completed the experiment. Your accuracy was above average! "
     ],
     show_clickable_nav: true,
     button_label_previous: 'Prev',
@@ -672,7 +692,7 @@ function buildTimeline(jsPsych) {
 
   timeline = timeline.concat(fullscreen);
   timeline = timeline.concat(instructions);
-  // timeline = timeline.concat(comprehension_check); // Comprehension check (implicit)
+  timeline = timeline.concat(comprehension_check); // Comprehension check (implicit)
   timeline = timeline.concat(ready);
   timeline = timeline.concat(learning_phase_1);
   timeline = timeline.concat(instructions_05);
