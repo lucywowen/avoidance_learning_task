@@ -66,7 +66,6 @@ class myinstructionsPlugin {
     }
     .jspsych-content-wrapper {
       background: #606060;
-      z-index: -1;
     }
     </style>`;
     // Draw task
@@ -140,7 +139,7 @@ class myinstructionsPlugin {
 
     // Define EventListener.
     const btnListener = (evt) => {
-      console.log(evt)
+
       evt.target.removeEventListener('click', btnListener);
       if(evt.currentTarget.id === "jspsych-instructions-back"){
         back();
@@ -156,7 +155,7 @@ class myinstructionsPlugin {
       display_element.querySelector('.instructions').innerHTML = `<p>${trial.pages[current_page]}</p>`;
 
       // Update prev button
-      console.log('test')
+
       if (current_page != 0) {
         display_element.querySelector('#jspsych-instructions-back').disabled = false;
         display_element.querySelector('#jspsych-instructions-back').addEventListener('click', btnListener);

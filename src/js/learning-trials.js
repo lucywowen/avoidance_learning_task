@@ -180,6 +180,12 @@ class LearningPlugin {
     new_html += '<div class="shado"></div>'
     new_html += '</div>';
 
+    // // Draw buttons
+    // new_html += "<div class='leanring-choice'>";
+    // new_html += "<button id='right' class='jspsych-btn' style='margin-right: 5px;'>Left &gt; Prev</button>";
+    // new_html += "<button id='left' class='jspsych-btn' style='margin-left: 5px;'>Left &gt;</button></div>";
+
+
     new_html += '</div>';
 
     // draw
