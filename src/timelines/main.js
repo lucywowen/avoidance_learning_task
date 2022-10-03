@@ -708,6 +708,13 @@ function buildTimeline(jsPsych) {
     button_label_next: 'Next',
   }
 
+  var final_trial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `<p>You've finished the last task. Thanks for participating!</p>
+      <p><a href="https://app.prolific.co/submissions/complete?cc=CK5KGDJA">Click here to return to Prolific and complete the study</a>.</p>`,
+    choices: "NO_KEYS"
+  }
+
   const fullscreen = {
     type: jsPsychFullscreen
   }
@@ -726,6 +733,7 @@ function buildTimeline(jsPsych) {
   timeline = timeline.concat(instructions_05);
   timeline = timeline.concat(probe_phase_2);
   timeline = timeline.concat(complete);
+  timeline = timeline.concat(final_trial);
 
   return timeline;
 }
