@@ -237,7 +237,7 @@ function buildTimeline(jsPsych) {
 
   // Iteratively define trials
   // for (i = 0; i < 12; i++) {
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 12; i++) {
 
 
     // Initialize (temporary) trial array.
@@ -388,10 +388,10 @@ function buildTimeline(jsPsych) {
   var probe_phase_1 = [];
   // Iteratively define trials
   // for (i = 0; i < 8; i++) {
-  for (var p = 0; p < 4; p++) {
+  for (var p = 0; p < 8; p++) {
 
     // for (j = 0; j < 8; j++) {
-    for (var q = 0; q < 4; q++) {
+    for (var q = 0; q < 8; q++) {
 
       for (var c = 0; c < 3; c++) {
 
@@ -471,7 +471,7 @@ function buildTimeline(jsPsych) {
 
   // Iteratively define trials
   // for (i = 0; i < 12; i++) {
-  for (var n = 0; n < 2; n++) {
+  for (var n = 0; n < 12; n++) {
 
     // Initialize (temporary) trial array.
     const trials = [];
@@ -631,9 +631,9 @@ function buildTimeline(jsPsych) {
   //   for (s = 8; s < 16; s++) {
 
   // Iteratively define trials
-  for (var r = 8; r < 10; r++) {
+  for (var r = 8; r < 16; r++) {
 
-    for (var s = 8; s < 10; s++) {
+    for (var s = 8; s < 16; s++) {
 
       for (var d = 0; d < 3; d++) {
 
