@@ -23,16 +23,16 @@ const jsPsychOptions = {
 
 function buildTimeline(jsPsych) {
 
-  // capture info from Prolific
-  var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-  var study_id = jsPsych.data.getURLVariable('STUDY_ID');
-  var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+  // // capture info from Prolific
+  // var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+  // var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+  // var session_id = jsPsych.data.getURLVariable('SESSION_ID');
 
-  jsPsych.data.addProperties({
-    subject_id: subject_id,
-    study_id: study_id,
-    session_id: session_id
-  });
+  // jsPsych.data.addProperties({
+  //   subject_id: subject_id,
+  //   study_id: study_id,
+  //   session_id: session_id
+  // });
 
   // Define unique symbols.
   var symbol_array = ['c','d','e','f','j','k','m','o','s','t','y','C','N','O','L','T']
@@ -708,12 +708,12 @@ function buildTimeline(jsPsych) {
     button_label_next: 'Next',
   }
 
-  var final_trial = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>You've finished the last task. Thanks for participating!</p>
-      <p><a href="https://app.prolific.co/submissions/complete?cc=CK5KGDJA">Click here to return to Prolific and complete the study</a>.</p>`,
-    choices: "NO_KEYS"
-  }
+  // var final_trial = {
+  //   type: jsPsychHtmlKeyboardResponse,
+  //   stimulus: `<p>You've finished the last task. Thanks for participating!</p>
+  //     <p><a href="https://app.prolific.co/submissions/complete?cc=CK5KGDJA">Click here to return to Prolific and complete the study</a>.</p>`,
+  //   choices: "NO_KEYS"
+  // }
 
   const fullscreen = {
     type: jsPsychFullscreen
