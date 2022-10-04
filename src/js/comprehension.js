@@ -160,7 +160,6 @@ class ComprehensionPlugin {
         // Store response
         responses.push(val)
 
-        console.log(val)
         // Check accuracy
         if ( correct[i] != val ) {
           num_errors++;
