@@ -212,12 +212,6 @@ function buildTimeline(jsPsych) {
         "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
       ]
     }
-    // pages: [
-    //   "That's the end of the selection phase. Great job!",
-    //   "Take a break for a few moments and<br>click next when you are ready to continue.",
-    //   "Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.",
-    //   "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
-    // ],
   }
 
   // //---------------------------------------//
