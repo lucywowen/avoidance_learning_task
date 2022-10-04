@@ -15,7 +15,10 @@ import '../css/robots-css.min.css'
 // Add your jsPsych options here.
 // Honeycomb will combine these custom options with other options needed by Honyecomb.
 const jsPsychOptions = {
-  on_trial_finish: function (data) {
+  on_trial_finish: function(data) {
+    if (typeof data.value == 'undefined') {
+      data.value='replacement';
+    }
     console.log(data)
   }
 };
@@ -59,9 +62,9 @@ function buildTimeline(jsPsych) {
   var correct_trial_count = 0;
   var total_trial_count = 0;
 
-  // //---------------------------------------//
-  // // Define learning phase instructions.
-  // //---------------------------------------//
+  //---------------------------------------//
+  // Define learning phase instructions.
+  //---------------------------------------//
   var instructions_01 = {
     type: jsPsychMyInstructions,
     pages: [

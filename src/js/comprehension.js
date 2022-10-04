@@ -123,7 +123,7 @@ class ComprehensionPlugin {
 
       // Close item
       html += '<br></div>';
-      
+
     }
 
     // add submit button
