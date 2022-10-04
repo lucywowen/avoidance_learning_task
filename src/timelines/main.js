@@ -20,7 +20,6 @@ const jsPsychOptions = {
   }
 };
 
-
 function buildTimeline(jsPsych) {
 
   // // capture info from Prolific
