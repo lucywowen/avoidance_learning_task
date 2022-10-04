@@ -733,7 +733,7 @@ function buildTimeline(jsPsych) {
   timeline = timeline.concat(instructions_05);
   timeline = timeline.concat(probe_phase_2);
   timeline = timeline.concat(complete);
-  timeline = timeline.concat(final_trial);
+  // timeline = timeline.concat(final_trial);
 
   return timeline;
 }
