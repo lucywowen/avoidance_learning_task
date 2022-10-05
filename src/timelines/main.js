@@ -378,7 +378,9 @@ function buildTimeline(jsPsych) {
   // Probe phases are comprised of
   // every possible pair combination
   // (28 in total) presented 4 times
-  // (112 total trials).
+  // (112 total trials). Each presented 3 times 
+  // either neutral (gray) background or 
+  // 2 other contexts (reward or punishment).
 
   // Initialize phase array.
   var probe_phase_1 = [];
