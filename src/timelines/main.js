@@ -24,6 +24,28 @@ const jsPsychOptions = {
       data.value='replacement';
     }
     console.log(data)
+
+    var subject_id = data.getURLVariable('PROLIFIC_PID');
+    var study_id = data.getURLVariable('STUDY_ID');
+    var session_id = data.getURLVariable('SESSION_ID');
+    
+    if (typeof subject_id == 'undefined') {
+      subject_id ='undefined_replacement';
+    }
+  
+    if (typeof study_id == 'undefined') {
+      study_id ='undefined_replacement';
+    }
+  
+    if (typeof session_id == 'undefined') {
+      session_id ='undefined_replacement';
+    }
+  
+    data.addProperties({
+      subject_id: subject_id,
+      study_id: study_id,
+      session_id: session_id
+    });
   }
 };
 
