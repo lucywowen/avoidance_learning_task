@@ -7,7 +7,7 @@ import jsPsychPractice from '../js/practice'
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen'
 import jsPsychInstructions from '@jspsych/plugin-instructions'
 import jsPsychCallFunction from '@jspsych/plugin-call-function'
-import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
+// import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
 
@@ -30,27 +30,27 @@ const jsPsychOptions = {
 function buildTimeline(jsPsych) {
 
   // capture info from Prolific
-  var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-  var study_id = jsPsych.data.getURLVariable('STUDY_ID');
-  var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+  // var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+  // var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+  // var session_id = jsPsych.data.getURLVariable('SESSION_ID');
   
-  if (typeof subject_id == 'undefined') {
-    subject_id ='undefined_replacement';
-  }
+  // if (typeof subject_id == 'undefined') {
+  //   subject_id ='undefined_replacement';
+  // }
 
-  if (typeof study_id == 'undefined') {
-    study_id ='undefined_replacement';
-  }
+  // if (typeof study_id == 'undefined') {
+  //   study_id ='undefined_replacement';
+  // }
 
-  if (typeof session_id == 'undefined') {
-    session_id ='undefined_replacement';
-  }
+  // if (typeof session_id == 'undefined') {
+  //   session_id ='undefined_replacement';
+  // }
 
-  jsPsych.data.addProperties({
-    subject_id: subject_id,
-    study_id: study_id,
-    session_id: session_id
-  });
+  // jsPsych.data.addProperties({
+  //   subject_id: subject_id,
+  //   study_id: study_id,
+  //   session_id: session_id
+  // });
 
   // Define unique symbols.
   var symbol_array = ['c','d','e','f','j','k','m','o','s','t','y','C','N','O','L','T']
@@ -721,12 +721,12 @@ function buildTimeline(jsPsych) {
     button_label_next: 'Next',
   }
 
-  var final_trial = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>You've finished the last task. Thanks for participating!</p>
-      <p><a href="https://app.prolific.co/submissions/complete?cc=CK5KGDJA">Click here to return to Prolific and complete the study</a>.</p>`,
-    choices: "NO_KEYS"
-  }
+  // var final_trial = {
+  //   type: jsPsychHtmlKeyboardResponse,
+  //   stimulus: `<p>You've finished the last task. Thanks for participating!</p>
+  //     <p><a href="https://app.prolific.co/submissions/complete?cc=CK5KGDJA">Click here to return to Prolific and complete the study</a>.</p>`,
+  //   choices: "NO_KEYS"
+  // }
 
   const fullscreen = {
     type: jsPsychFullscreen
@@ -748,7 +748,7 @@ function buildTimeline(jsPsych) {
   timeline = timeline.concat(instructions_05);
   timeline = timeline.concat(probe_phase_2);
   timeline = timeline.concat(complete);
-  timeline = timeline.concat(final_trial);
+  // timeline = timeline.concat(final_trial);
 
 
   return timeline;
