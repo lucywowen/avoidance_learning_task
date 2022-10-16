@@ -214,7 +214,8 @@ class ProbePlugin {
         "symbol_R": trial.symbol_R,
         "rt": response.rt,
         "stimulus": trial.stimulus,
-        "key_press": response.key
+        "key_press": response.key,
+        "context": trial.context,
       };
 
       // clear the display
