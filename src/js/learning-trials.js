@@ -26,6 +26,11 @@ const info = {
         pretty_name: 'Feedback (right)',
         description: 'Outcome for right robot.'
       },
+      probs: {
+        type: ParameterType.STRING,
+        pretty_name: 'Probability',
+        description: 'Reward/Avoid probability for each trial.'
+      },
       correct: {
         type: ParameterType.KEY,
         pretty_name: 'Correct',
@@ -321,6 +326,7 @@ class LearningPlugin {
         "outcome_R": trial.outcome_R,
         "correct": trial.correct,
         "context": trial.context,
+        "probs": trial.probs,
         "counterfactual":trial.counterfactual,
         "choice": response.key,
         "rt": response.rt,
