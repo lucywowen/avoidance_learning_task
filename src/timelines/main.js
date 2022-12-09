@@ -11,7 +11,7 @@ import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
-import { eventCodes } from '../config/main'
+// import { eventCodes } from '../config/main'
 
 
 
@@ -302,7 +302,7 @@ function buildTimeline(jsPsych) {
   // for (var i = 0; i < 2; i++) {
   for (var i = 0; i < 12; i++) {
 
-    const code = eventCodes.fixation;
+    // const code = eventCodes.fixation;
 
     // Initialize (temporary) trial array.
     const trials = [];
