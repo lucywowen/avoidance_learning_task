@@ -1,11 +1,12 @@
-
-import jsPsychComprehension from '../js/comprehension'
 import jsPsychLearning from '../js/learning-trials'
-import jsPsychMyInstructions from '../js/instructions'
 import jsPsychProbe from '../js/probe'
-import jsPsychPractice from '../js/practice'
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen'
 import jsPsychInstructions from '@jspsych/plugin-instructions'
+// import jsPsychComprehension from '../js/comprehension'
+// import jsPsychMyInstructions from '../js/instructions'
+// import jsPsychPractice from '../js/practice'
+// import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
+// import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
 import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
@@ -27,30 +28,15 @@ const jsPsychOptions = {
   }
 };
 
+function reduce(numerator,denominator){
+  var gcd = function gcd(a,b){
+    return b ? gcd(b, a%b) : a;
+  };
+  gcd = gcd(numerator,denominator);
+  return [numerator/gcd, denominator/gcd];
+}
+
 function buildTimeline(jsPsych) {
-
-  // capture info from Prolific
-  // var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-  // var study_id = jsPsych.data.getURLVariable('STUDY_ID');
-  // var session_id = jsPsych.data.getURLVariable('SESSION_ID');
-  
-  // if (typeof subject_id == 'undefined') {
-  //   subject_id ='undefined_replacement';
-  // }
-
-  // if (typeof study_id == 'undefined') {
-  //   study_id ='undefined_replacement';
-  // }
-
-  // if (typeof session_id == 'undefined') {
-  //   session_id ='undefined_replacement';
-  // }
-
-  // jsPsych.data.addProperties({
-  //   subject_id: subject_id,
-  //   study_id: study_id,
-  //   session_id: session_id
-  // });
 
   // Define unique symbols.
   var symbol_array = ['c','d','e','f','j','k','m','o','s','t','y','C','N','O','L','T']
@@ -78,76 +64,120 @@ function buildTimeline(jsPsych) {
   var correct_trial_count = 0;
   var total_trial_count = 0;
 
+  // Define probabilities (default is all 75/25%)
+  var reward_probs_a = .6
+  var reward_probs_b = .8
+
   //---------------------------------------//
   // Define learning phase instructions.
   //---------------------------------------//
-  var instructions_01 = {
-    type: jsPsychMyInstructions,
+
+  var instructions_00 = {
+    type: jsPsychInstructions,
     pages: [
-      "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
-      "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
-      "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
-      "You'll also pick your team of knights from different places, either the desert or forrest.",
-      "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
-      "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
-      "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
-      "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
-      "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
-      "<b>HINT:</b> Pay attention to the symbols and the results of each test."
+      "Welcome to the experiment",
+      "We are first going to start with a few questions about your pain levels.",
     ],
-    symbol_L: "V",
-    symbol_R: "U",
   }
+  // var pain_01 = {
+  //   type: jsPsychHtmlSliderResponse,
+  //   labels: ['worst imaginable', 'no pain'],
+  //   stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
+  // };
 
-  var practice_block_01 = {
-    type: jsPsychPractice,
-    symbol_L: "V",
-    symbol_R: "U",
-    outcome_L: "zero",
-    outcome_R: "win",
-    context:context_array[0],
-    choices: ['arrowleft','arrowright'],
-    correct: 'arrowright',
-    feedback_duration: 2000
-  }
+  // var pain_02 = {
+  //   type: jsPsychHtmlSliderResponse,
+  //   labels: ['worst imaginable', 'no pain'],
+  //   stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
+  // };
 
-  const instructions_02 = {
-    type: jsPsychMyInstructions,
-    pages: [
-      "Great job! Now let's try for one more set of knights."
-    ],
-    symbol_L: "W",
-    symbol_R: "R",
-  }
+  //   var pain_03 = {
+  //     type: jsPsychHtmlSliderResponse,
+  //     labels: ['worst imaginable', 'no pain'],
+  //     stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
+  // };
 
-  var practice_block_02 = {
-    type: jsPsychPractice,
-    symbol_L: "W",
-    symbol_R: "R",
-    outcome_L: "lose",
-    outcome_R: "zero",
-    context:context_array[1],
-    choices: ['arrowleft','arrowright'],
-    correct: 'arrowright',
-    feedback_duration: 2000
-  }
+  //   var pain_04 = {
+  //     type: jsPsychSurveyMultiChoice,
+  //     questions: [
+  //       {
+  //         prompt: "How long have you been in pain?",
+  //         name: 'Pain Duration', 
+  //         options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
+  //         '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
+  //         required: true
+  //       }
+  //     ],
+  //   };
 
-  const instructions_03 = {
-    type: jsPsychMyInstructions,
-    pages: [
-      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
-      "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
-      "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
-      "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
-      "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
-      "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
-      symbol_L: " ",
-      symbol_R: " "
-  }
 
-  var comprehension = {
-    type: jsPsychComprehension
-  }
+  // var instructions_01 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
+  //     "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
+  //     "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
+  //     "You'll also pick your team of knights from different places, either the desert or forrest.",
+  //     "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
+  //     "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
+  //     "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
+  //     "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
+  //     "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
+  //     "<b>HINT:</b> Pay attention to the symbols and the results of each test."
+  //   ],
+  //   symbol_L: "V",
+  //   symbol_R: "U",
+  // }
+
+  // var practice_block_01 = {
+  //   type: jsPsychPractice,
+  //   symbol_L: "V",
+  //   symbol_R: "U",
+  //   outcome_L: "zero",
+  //   outcome_R: "win",
+  //   context:context_array[0],
+  //   choices: ['arrowleft','arrowright'],
+  //   correct: 'arrowright',
+  //   feedback_duration: 2000
+  // }
+
+  // const instructions_02 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "Great job! Now let's try for one more set of knights."
+  //   ],
+  //   symbol_L: "W",
+  //   symbol_R: "R",
+  // }
+
+  // var practice_block_02 = {
+  //   type: jsPsychPractice,
+  //   symbol_L: "W",
+  //   symbol_R: "R",
+  //   outcome_L: "lose",
+  //   outcome_R: "zero",
+  //   context:context_array[1],
+  //   choices: ['arrowleft','arrowright'],
+  //   correct: 'arrowright',
+  //   feedback_duration: 2000
+  // }
+
+  // const instructions_03 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
+  //     "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
+  //     "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
+  //     "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
+  //     "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
+  //     "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
+  //     symbol_L: " ",
+  //     symbol_R: " "
+  // }
+
+  // var comprehension = {
+  //   type: jsPsychComprehension
+  // }
 
   // Define comprehension threshold.
   var max_errors = 0;
@@ -156,12 +186,17 @@ function buildTimeline(jsPsych) {
 
   var instructions = {
     timeline: [
-      instructions_01,
-      practice_block_01,
-      instructions_02,
-      practice_block_02,
-      instructions_03,
-      comprehension
+      instructions_00, 
+      // pain_01,
+      // pain_02,
+      // pain_03,
+      // pain_04,
+      // instructions_01,
+      // practice_block_01,
+      // instructions_02,
+      // practice_block_02,
+      // instructions_03,
+      // comprehension
     ],
   // }
     loop_function: function(data) {
@@ -246,6 +281,18 @@ function buildTimeline(jsPsych) {
   var low_quality;
   var val;
   var color;
+  var reduced_a;
+  var reduced_b;
+  var diff_a;
+  var diff_b;
+  var arr_1;
+  var arr_2;
+  var diff_arr_1;
+  var diff_arr_2;
+  var reward_prob;
+
+
+
 
   // Iteratively define trials
   // for (i = 0; i < 12; i++) {
@@ -260,12 +307,61 @@ function buildTimeline(jsPsych) {
 
       // Define metadata.
 
-      if (j % 2 == 0) { 
+      // if (j % 2 == 0) { 
+      //   val = 'win'; 
+      //   color = context_array[3];
+      // }
+      // else { 
+      //   val = 'lose'; 
+      //   color = context_array[4];
+      // }
+      reduced_a = reduce(reward_probs_a*100, 100);
+      diff_a = reduced_a[1] - reduced_a[0];
+      reduced_b = reduce(reward_probs_b*100, 100);
+      diff_b = reduced_b[1] - reduced_b[0];
+
+      if (j == 0) { 
         val = 'win'; 
+        arr_1 = Array(reduced_a[0]).fill('zero');
+        diff_arr_1 = Array(diff_a).fill(val);
+        arr_1 = arr_1.concat(diff_arr_1);
+        arr_2 = Array(reduced_a[0]).fill(val);
+        diff_arr_2 = Array(diff_a).fill('zero');
+        arr_2 = arr_2.concat(diff_arr_2);  
+        reward_prob = reward_probs_a;   
+        color = context_array[3];
+      }
+      else if (j == 1) {
+        val = 'lose'; 
+        arr_1 = Array(reduced_a[0]).fill('zero');
+        diff_arr_1 = Array(diff_a).fill(val);
+        arr_1 = arr_1.concat(diff_arr_1);
+        arr_2 = Array(reduced_a[0]).fill(val);
+        diff_arr_2 = Array(diff_a).fill('zero');
+        arr_2 = arr_2.concat(diff_arr_2); 
+        reward_prob = reward_probs_a;    
+        color = context_array[4];
+      }
+      else if (j == 2) {
+        val = 'win'; 
+        arr_1 = Array(reduced_b[0]).fill('zero');
+        diff_arr_1 = Array(diff_b).fill(val);
+        arr_1 = arr_1.concat(diff_arr_1);
+        arr_2 = Array(reduced_b[0]).fill(val);
+        diff_arr_2 = Array(diff_b).fill('zero');
+        arr_2 = arr_2.concat(diff_arr_2);
+        reward_prob = reward_probs_b; 
         color = context_array[3];
       }
       else { 
         val = 'lose'; 
+        arr_1 = Array(reduced_b[0]).fill('zero');
+        diff_arr_1 = Array(diff_b).fill(val);
+        arr_1 = arr_1.concat(diff_arr_1);
+        arr_2 = Array(reduced_b[0]).fill(val);
+        diff_arr_2 = Array(diff_b).fill('zero');
+        arr_2 = arr_2.concat(diff_arr_2);
+        reward_prob = reward_probs_b;  
         color = context_array[4];
       }
 
@@ -284,8 +380,9 @@ function buildTimeline(jsPsych) {
         type: jsPsychLearning,
         symbol_L: symbol_array[2*j+0],
         symbol_R: symbol_array[2*j+1],
-        outcome_L: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
-        outcome_R: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
+        outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
+        outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
+        probs: reward_prob,
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
@@ -335,8 +432,9 @@ function buildTimeline(jsPsych) {
         type: jsPsychLearning,
         symbol_L: symbol_array[2*j+1],
         symbol_R: symbol_array[2*j+0],
-        outcome_L: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
-        outcome_R: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
+        outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
+        outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
+        probs: reward_prob,
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
@@ -494,14 +592,64 @@ function buildTimeline(jsPsych) {
     for (var m = 4; m < 8; m++) {
     // for (j = 4; j < 8; j++) {
 
-        // Define metadata.
-        if (m % 2 == 0) { 
+        // // Define metadata.
+        // if (m % 2 == 0) { 
+        //   val = 'win'; 
+        //   color = context_array[6];
+        // }
+        // else { 
+        //   val = 'lose'; 
+        //   color = context_array[7];
+        // }
+
+        reduced_a = reduce(reward_probs_a*100, 100);
+        diff_a = reduced_a[1] - reduced_a[0];
+        reduced_b = reduce(reward_probs_b*100, 100);
+        diff_b = reduced_b[1] - reduced_b[0];
+  
+        if (j == 0) { 
           val = 'win'; 
-          color = context_array[6];
+          arr_1 = Array(reduced_a[0]).fill('zero');
+          diff_arr_1 = Array(diff_a).fill(val);
+          arr_1 = arr_1.concat(diff_arr_1);
+          arr_2 = Array(reduced_a[0]).fill(val);
+          diff_arr_2 = Array(diff_a).fill('zero');
+          arr_2 = arr_2.concat(diff_arr_2);  
+          reward_prob = reward_probs_a;   
+          color = context_array[3];
+        }
+        else if (j == 1) {
+          val = 'lose'; 
+          arr_1 = Array(reduced_a[0]).fill('zero');
+          diff_arr_1 = Array(diff_a).fill(val);
+          arr_1 = arr_1.concat(diff_arr_1);
+          arr_2 = Array(reduced_a[0]).fill(val);
+          diff_arr_2 = Array(diff_a).fill('zero');
+          arr_2 = arr_2.concat(diff_arr_2); 
+          reward_prob = reward_probs_a;    
+          color = context_array[4];
+        }
+        else if (j == 2) {
+          val = 'win'; 
+          arr_1 = Array(reduced_b[0]).fill('zero');
+          diff_arr_1 = Array(diff_b).fill(val);
+          arr_1 = arr_1.concat(diff_arr_1);
+          arr_2 = Array(reduced_b[0]).fill(val);
+          diff_arr_2 = Array(diff_b).fill('zero');
+          arr_2 = arr_2.concat(diff_arr_2);
+          reward_prob = reward_probs_b; 
+          color = context_array[3];
         }
         else { 
           val = 'lose'; 
-          color = context_array[7];
+          arr_1 = Array(reduced_b[0]).fill('zero');
+          diff_arr_1 = Array(diff_b).fill(val);
+          arr_1 = arr_1.concat(diff_arr_1);
+          arr_2 = Array(reduced_b[0]).fill(val);
+          diff_arr_2 = Array(diff_b).fill('zero');
+          arr_2 = arr_2.concat(diff_arr_2);
+          reward_prob = reward_probs_b;  
+          color = context_array[4];
         }
 
       // // Define metadata.
@@ -523,8 +671,8 @@ function buildTimeline(jsPsych) {
         type: jsPsychLearning,
         symbol_L: symbol_array[2*m+0],
         symbol_R: symbol_array[2*m+1],
-        outcome_L: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
-        outcome_R: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
+        outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
+        outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
@@ -573,8 +721,8 @@ function buildTimeline(jsPsych) {
         type: jsPsychLearning,
         symbol_L: symbol_array[2*m+1],
         symbol_R: symbol_array[2*m+0],
-        outcome_L: jsPsych.randomization.sampleWithoutReplacement(['zero','zero','zero',val],1)[0],
-        outcome_R: jsPsych.randomization.sampleWithoutReplacement([val,val,val,'zero'],1)[0],
+        outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
+        outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
