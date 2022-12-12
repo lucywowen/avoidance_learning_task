@@ -1,5 +1,8 @@
 import { ParameterType } from "jspsych";
 import { images } from '../lib/utils';
+import { eventCodes } from '../config/main'
+import { pdSpotEncode } from '../lib/markup/photodiode'
+
 const info = {
   name: 'practice',
   parameters: {
@@ -40,6 +43,12 @@ const info = {
       type: ParameterType.STRING,
       pretty_name: 'Condition',
       description: 'Win or lose condition'
+    },
+    context_duration: {
+      type: ParameterType.INT,
+      pretty_name: 'Context duration',
+      default: 500,
+      description: 'Duration of context.'
     },
     randomize: {
       type: ParameterType.BOOL,
@@ -178,6 +187,26 @@ trial(display_element, trial) {
 
   new_html += '</div>';
 
+
+  // jsPsych.pluginAPI.setTimeout(function() {
+  //   display_element.querySelector('#jspsych-pre-coin1').style.visibility = 'hidden';
+  //   display_element.innerHTML = '<img id="jspsych-pre-coin2" class="jspsych-pre-coin" src="mask.jpg"></img>';
+  //   second_change();
+  // }, 1000);
+
+
+  // var fixation = {
+  //   type: 'html-keyboard-response',
+  //   stimulus: '<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>',
+  //   choices: "NO_KEYS",
+  //   trial_duration: 500,
+  // };
+  
+  // this.jsPsych.pluginAPI.setTimeout(function() {
+  //   fixation();
+  // }, trial.context_duration);
+
+
   // draw
   display_element.innerHTML = new_html;
 
@@ -185,15 +214,19 @@ trial(display_element, trial) {
   // Task functions.
   //---------------------------------------//
 
+
   // store response
   var response_history = [];
 
   // store response
   var response = {
+    
     rt: null,
-    key: null
+    key: null,
+    code: null,
   };
   
+
   // function to handle responses by the subject
   var after_response = (info) => {
 
@@ -201,8 +234,12 @@ trial(display_element, trial) {
     this.jsPsych.pluginAPI.clearAllTimeouts();
     this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
 
-    // record responses
+    const code = eventCodes.response;
+    pdSpotEncode(code);
+    response.code = code;
 
+    // record responses
+    
     response.rt = info.rt;
     response.key = info.key;
 
@@ -240,6 +277,10 @@ trial(display_element, trial) {
     this.jsPsych.pluginAPI.clearAllTimeouts();
     this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
 
+    const code = eventCodes.feedback;
+    pdSpotEncode(code);
+    trial.feedback_code = code;
+    
     // Update left side outcome
     if (response.key == 'arrowleft' || trial.counterfactual) {
       if (trial.outcome_L == 'win') {
@@ -336,6 +377,10 @@ trial(display_element, trial) {
       display_element.querySelector('#runeL').innerHTML = trial.symbol_L;
       display_element.querySelector('#runeR').innerHTML = trial.symbol_R;
 
+      const code = eventCodes.display;
+      pdSpotEncode(code);
+      trial.display_code = code;
+
     }
 
     // Reinitialize keyboardListener.
@@ -358,8 +403,12 @@ trial(display_element, trial) {
     // gather the data to store for the trial
     var trial_data = {
       "rt": response.rt,
+      "response_code":response.code,
+      "display_code":trial.display_code,
+      "feedback_code":trial.feedback_code,
       "stimulus": trial.stimulus,
       "key_press": response.key
+      
     };
 
 
