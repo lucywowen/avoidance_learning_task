@@ -5,14 +5,14 @@ import jsPsychInstructions from '@jspsych/plugin-instructions'
 import jsPsychComprehension from '../js/comprehension'
 import jsPsychMyInstructions from '../js/instructions'
 import jsPsychPractice from '../js/practice'
-import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
-import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
+// import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
+// import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
 import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
-// import { eventCodes } from '../config/main'
 
+// import { eventCodes } from '../config/main'
 
 
 // Add your jsPsych options here.
@@ -83,55 +83,55 @@ function buildTimeline(jsPsych) {
       "We are first going to start with a few questions about your pain levels.",
     ],
   }
-  var pain_01 = {
-    type: jsPsychHtmlSliderResponse,
-    labels: ['worst imaginable', 'no pain'],
-    stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
-  };
+  // var pain_01 = {
+  //   type: jsPsychHtmlSliderResponse,
+  //   labels: ['worst imaginable', 'no pain'],
+  //   stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
+  // };
 
-  var pain_02 = {
-    type: jsPsychHtmlSliderResponse,
-    labels: ['worst imaginable', 'no pain'],
-    stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
-  };
+  // var pain_02 = {
+  //   type: jsPsychHtmlSliderResponse,
+  //   labels: ['worst imaginable', 'no pain'],
+  //   stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
+  // };
 
-    var pain_03 = {
-      type: jsPsychHtmlSliderResponse,
-      labels: ['worst imaginable', 'no pain'],
-      stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
-  };
+  //   var pain_03 = {
+  //     type: jsPsychHtmlSliderResponse,
+  //     labels: ['worst imaginable', 'no pain'],
+  //     stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
+  // };
 
-    var pain_04 = {
-      type: jsPsychSurveyMultiChoice,
-      questions: [
-        {
-          prompt: "How long have you been in pain?",
-          name: 'Pain Duration', 
-          options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
-          '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
-          required: true
-        }
-      ],
-    };
+  //   var pain_04 = {
+  //     type: jsPsychSurveyMultiChoice,
+  //     questions: [
+  //       {
+  //         prompt: "How long have you been in pain?",
+  //         name: 'Pain Duration', 
+  //         options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
+  //         '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
+  //         required: true
+  //       }
+  //     ],
+  //   };
 
 
-  var instructions_01 = {
-    type: jsPsychMyInstructions,
-    pages: [
-      "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
-      "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
-      "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
-      "You'll also pick your team of knights from different places, either the desert or forrest.",
-      "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
-      "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
-      "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
-      "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
-      "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
-      "<b>HINT:</b> Pay attention to the symbols and the results of each test."
-    ],
-    symbol_L: "V",
-    symbol_R: "U",
-  }
+  // var instructions_01 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
+  //     "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
+  //     "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
+  //     "You'll also pick your team of knights from different places, either the desert or forrest.",
+  //     "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
+  //     "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
+  //     "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
+  //     "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
+  //     "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
+  //     "<b>HINT:</b> Pay attention to the symbols and the results of each test."
+  //   ],
+  //   symbol_L: "V",
+  //   symbol_R: "U",
+  // }
 
   var practice_block_01 = {
     type: jsPsychPractice,
@@ -188,14 +188,15 @@ function buildTimeline(jsPsych) {
   var max_loops = 3;
   var num_loops = 0;
 
+
   var instructions = {
     timeline: [
       instructions_00, 
-      pain_01,
-      pain_02,
-      pain_03,
-      pain_04,
-      instructions_01,
+      // pain_01,
+      // pain_02,
+      // pain_03,
+      // pain_04,
+      // instructions_01,
       practice_block_01,
       instructions_02,
       practice_block_02,
