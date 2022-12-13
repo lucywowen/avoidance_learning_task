@@ -2,12 +2,12 @@ import jsPsychLearning from '../js/learning-trials'
 import jsPsychProbe from '../js/probe'
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen'
 import jsPsychInstructions from '@jspsych/plugin-instructions'
-import jsPsychComprehension from '../js/comprehension'
-import jsPsychMyInstructions from '../js/instructions'
-import jsPsychPractice from '../js/practice'
+// import jsPsychComprehension from '../js/comprehension'
+// import jsPsychMyInstructions from '../js/instructions'
+// import jsPsychPractice from '../js/practice'
 // import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
 // import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
-import jsPsychCallFunction from '@jspsych/plugin-call-function'
+// import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
@@ -133,55 +133,55 @@ function buildTimeline(jsPsych) {
   //   symbol_R: "U",
   // }
 
-  var practice_block_01 = {
-    type: jsPsychPractice,
-    symbol_L: "V",
-    symbol_R: "U",
-    outcome_L: "zero",
-    outcome_R: "win",
-    context:context_array[0],
-    choices: ['arrowleft','arrowright'],
-    correct: 'arrowright',
-    feedback_duration: 2000
-  }
+  // var practice_block_01 = {
+  //   type: jsPsychPractice,
+  //   symbol_L: "V",
+  //   symbol_R: "U",
+  //   outcome_L: "zero",
+  //   outcome_R: "win",
+  //   context:context_array[0],
+  //   choices: ['arrowleft','arrowright'],
+  //   correct: 'arrowright',
+  //   feedback_duration: 2000
+  // }
 
-  const instructions_02 = {
-    type: jsPsychMyInstructions,
-    pages: [
-      "Great job! Now let's try for one more set of knights."
-    ],
-    symbol_L: "W",
-    symbol_R: "R",
-  }
+  // const instructions_02 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "Great job! Now let's try for one more set of knights."
+  //   ],
+  //   symbol_L: "W",
+  //   symbol_R: "R",
+  // }
 
-  var practice_block_02 = {
-    type: jsPsychPractice,
-    symbol_L: "W",
-    symbol_R: "R",
-    outcome_L: "lose",
-    outcome_R: "zero",
-    context:context_array[1],
-    choices: ['arrowleft','arrowright'],
-    correct: 'arrowright',
-    feedback_duration: 2000
-  }
+  // var practice_block_02 = {
+  //   type: jsPsychPractice,
+  //   symbol_L: "W",
+  //   symbol_R: "R",
+  //   outcome_L: "lose",
+  //   outcome_R: "zero",
+  //   context:context_array[1],
+  //   choices: ['arrowleft','arrowright'],
+  //   correct: 'arrowright',
+  //   feedback_duration: 2000
+  // }
 
-  const instructions_03 = {
-    type: jsPsychMyInstructions,
-    pages: [
-      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
-      "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
-      "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
-      "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
-      "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
-      "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
-      symbol_L: " ",
-      symbol_R: " "
-  }
+  // const instructions_03 = {
+  //   type: jsPsychMyInstructions,
+  //   pages: [
+  //     "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
+  //     "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
+  //     "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
+  //     "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
+  //     "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
+  //     "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
+  //     symbol_L: " ",
+  //     symbol_R: " "
+  // }
 
-  var comprehension = {
-    type: jsPsychComprehension
-  }
+  // var comprehension = {
+  //   type: jsPsychComprehension
+  // }
 
   // Define comprehension threshold.
   var max_errors = 0;
@@ -197,11 +197,11 @@ function buildTimeline(jsPsych) {
       // pain_03,
       // pain_04,
       // instructions_01,
-      practice_block_01,
-      instructions_02,
-      practice_block_02,
-      instructions_03,
-      comprehension
+      // practice_block_01,
+      // instructions_02,
+      // practice_block_02,
+      // instructions_03,
+      // comprehension
     ],
   // }
     loop_function: function(data) {
@@ -226,13 +226,13 @@ function buildTimeline(jsPsych) {
     }
   }
 
-  var comprehension_check = {
-    type: jsPsychCallFunction,
-    func: function(){},
-    on_finish: function() {
-      if (low_quality) { jsPsych.endExperiment(); }
-    }
-  }
+  // var comprehension_check = {
+  //   type: jsPsychCallFunction,
+  //   func: function(){},
+  //   on_finish: function() {
+  //     if (low_quality) { jsPsych.endExperiment(); }
+  //   }
+  // }
 
   var ready = {
     type: jsPsychInstructions,
@@ -873,7 +873,7 @@ function buildTimeline(jsPsych) {
 
   timeline = timeline.concat(fullscreen);
   timeline = timeline.concat(instructions);
-  timeline = timeline.concat(comprehension_check); 
+  // timeline = timeline.concat(comprehension_check); 
   timeline = timeline.concat(ready);
   timeline = timeline.concat(learning_phase_1);
   timeline = timeline.concat(instructions_05);
