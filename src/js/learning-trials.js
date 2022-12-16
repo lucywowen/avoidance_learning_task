@@ -1,5 +1,7 @@
 import { ParameterType } from "jspsych";
 import { images } from '../lib/utils';
+import { eventCodes } from '../config/main'
+import { pdSpotEncode } from '../lib/markup/photodiode'
 
 const info = {
     name: 'learning-trials',
@@ -196,6 +198,11 @@ class LearningPlugin {
     // draw
     display_element.innerHTML = new_html;
 
+    const code = eventCodes.display;
+    pdSpotEncode(code);
+    trial.display_code = code;
+
+
     //---------------------------------------//
     // Task functions.
     //---------------------------------------//
@@ -203,7 +210,8 @@ class LearningPlugin {
     // store response
     var response = {
       rt: null,
-      key: null
+      key: null,
+      code: null,
     };
 
     // function to handle responses by the subject
@@ -212,6 +220,12 @@ class LearningPlugin {
       // Kill any timeout handlers / keyboard listeners
       this.jsPsych.pluginAPI.clearAllTimeouts();
       this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+
+      
+      const code = eventCodes.response;
+      pdSpotEncode(code);
+      response.code = code;
+      
 
       // record responses
       response.rt = info.rt;
@@ -245,6 +259,9 @@ class LearningPlugin {
       if (typeof keyboardListener !== 'undefined') {
         this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
       }
+      const code = eventCodes.feedback;
+      pdSpotEncode(code);
+      trial.feedback_code = code;
 
       // Update left side outcome
       if (response.key == 'arrowleft' || trial.counterfactual) {
@@ -327,6 +344,9 @@ class LearningPlugin {
         "correct": trial.correct,
         "context": trial.context,
         "probs": trial.probs,
+        "response_code":response.code,
+        "display_code":trial.display_code,
+        "feedback_code":trial.feedback_code,
         "counterfactual":trial.counterfactual,
         "choice": response.key,
         "rt": response.rt,
