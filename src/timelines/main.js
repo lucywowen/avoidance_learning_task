@@ -57,6 +57,9 @@ function buildTimeline(jsPsych) {
   context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_2_array, 1));
 
+  console.log(context_array)
+
+  
   // Define missed repsonses count.
   var missed_threshold = 10;
   var missed_responses = 0;

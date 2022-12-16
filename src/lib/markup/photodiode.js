@@ -45,6 +45,9 @@ const pdSpotEncode = (taskCode) => {
     repeat_pulse_for(blinkTime, numBlinks);
     if (ipcRenderer) ipcRenderer.send("trigger", taskCode);
   }
+  else{
+    if (ipcRenderer) ipcRenderer.send("trigger", taskCode);
+  }
 };
 
 export { photodiodeGhostBox, pdSpotEncode };
