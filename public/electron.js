@@ -39,7 +39,8 @@ function createWindow () {
       icon: './favicon.ico',
       webPreferences: {
         nodeIntegration: true,
-        webSecurity: false
+        webSecurity: false,
+        contextIsolation: false
       }
     })
   } else {
@@ -49,7 +50,8 @@ function createWindow () {
       frame: false,
       webPreferences: {
         nodeIntegration: true,
-        webSecurity: true
+        webSecurity: true,
+        contextIsolation: false
       }
     })
   }
