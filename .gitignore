@@ -17,6 +17,9 @@
 /dist
 /out
 
+# participant responses
+/participant_responses
+
 # misc
 .DS_Store
 .env
