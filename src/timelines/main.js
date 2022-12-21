@@ -2,17 +2,15 @@ import jsPsychLearning from '../js/learning-trials'
 import jsPsychProbe from '../js/probe'
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen'
 import jsPsychInstructions from '@jspsych/plugin-instructions'
-// import jsPsychComprehension from '../js/comprehension'
-// import jsPsychMyInstructions from '../js/instructions'
-// import jsPsychPractice from '../js/practice'
-// import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
-// import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
-// import jsPsychCallFunction from '@jspsych/plugin-call-function'
+import jsPsychComprehension from '../js/comprehension'
+import jsPsychMyInstructions from '../js/instructions'
+import jsPsychPractice from '../js/practice'
+import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
+import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
+import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
-
-// import { eventCodes } from '../config/main'
 
 
 // Add your jsPsych options here.
@@ -86,105 +84,105 @@ function buildTimeline(jsPsych) {
       "We are first going to start with a few questions about your pain levels.",
     ],
   }
-  // var pain_01 = {
-  //   type: jsPsychHtmlSliderResponse,
-  //   labels: ['worst imaginable', 'no pain'],
-  //   stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
-  // };
+  var pain_01 = {
+    type: jsPsychHtmlSliderResponse,
+    labels: ['worst imaginable', 'no pain'],
+    stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
+  };
 
-  // var pain_02 = {
-  //   type: jsPsychHtmlSliderResponse,
-  //   labels: ['worst imaginable', 'no pain'],
-  //   stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
-  // };
+  var pain_02 = {
+    type: jsPsychHtmlSliderResponse,
+    labels: ['worst imaginable', 'no pain'],
+    stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
+  };
 
-  //   var pain_03 = {
-  //     type: jsPsychHtmlSliderResponse,
-  //     labels: ['worst imaginable', 'no pain'],
-  //     stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
-  // };
+    var pain_03 = {
+      type: jsPsychHtmlSliderResponse,
+      labels: ['worst imaginable', 'no pain'],
+      stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
+  };
 
-  //   var pain_04 = {
-  //     type: jsPsychSurveyMultiChoice,
-  //     questions: [
-  //       {
-  //         prompt: "How long have you been in pain?",
-  //         name: 'Pain Duration', 
-  //         options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
-  //         '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
-  //         required: true
-  //       }
-  //     ],
-  //   };
+    var pain_04 = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [
+        {
+          prompt: "How long have you been in pain?",
+          name: 'Pain Duration', 
+          options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
+          '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
+          required: true
+        }
+      ],
+    };
 
 
-  // var instructions_01 = {
-  //   type: jsPsychMyInstructions,
-  //   pages: [
-  //     "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
-  //     "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
-  //     "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
-  //     "You'll also pick your team of knights from different places, either the desert or forrest.",
-  //     "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
-  //     "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
-  //     "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
-  //     "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
-  //     "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
-  //     "<b>HINT:</b> Pay attention to the symbols and the results of each test."
-  //   ],
-  //   symbol_L: "V",
-  //   symbol_R: "U",
-  // }
+  var instructions_01 = {
+    type: jsPsychMyInstructions,
+    pages: [
+      "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
+      "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
+      "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
+      "You'll also pick your team of knights from different places, either the desert or forrest.",
+      "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
+      "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
+      "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
+      "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
+      "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
+      "<b>HINT:</b> Pay attention to the symbols and the results of each test."
+    ],
+    symbol_L: "V",
+    symbol_R: "U",
+  }
 
-  // var practice_block_01 = {
-  //   type: jsPsychPractice,
-  //   symbol_L: "V",
-  //   symbol_R: "U",
-  //   outcome_L: "zero",
-  //   outcome_R: "win",
-  //   context:context_array[0],
-  //   choices: ['arrowleft','arrowright'],
-  //   correct: 'arrowright',
-  //   feedback_duration: 2000
-  // }
+  var practice_block_01 = {
+    type: jsPsychPractice,
+    symbol_L: "V",
+    symbol_R: "U",
+    outcome_L: "zero",
+    outcome_R: "win",
+    context:context_array[0],
+    choices: ['arrowleft','arrowright'],
+    correct: 'arrowright',
+    feedback_duration: 2000
+  }
 
-  // const instructions_02 = {
-  //   type: jsPsychMyInstructions,
-  //   pages: [
-  //     "Great job! Now let's try for one more set of knights."
-  //   ],
-  //   symbol_L: "W",
-  //   symbol_R: "R",
-  // }
+  const instructions_02 = {
+    type: jsPsychMyInstructions,
+    pages: [
+      "Great job! Now let's try for one more set of knights."
+    ],
+    symbol_L: "W",
+    symbol_R: "R",
+  }
 
-  // var practice_block_02 = {
-  //   type: jsPsychPractice,
-  //   symbol_L: "W",
-  //   symbol_R: "R",
-  //   outcome_L: "lose",
-  //   outcome_R: "zero",
-  //   context:context_array[1],
-  //   choices: ['arrowleft','arrowright'],
-  //   correct: 'arrowright',
-  //   feedback_duration: 2000
-  // }
+  var practice_block_02 = {
+    type: jsPsychPractice,
+    symbol_L: "W",
+    symbol_R: "R",
+    outcome_L: "lose",
+    outcome_R: "zero",
+    context:context_array[1],
+    choices: ['arrowleft','arrowright'],
+    correct: 'arrowright',
+    feedback_duration: 2000
+  }
 
-  // const instructions_03 = {
-  //   type: jsPsychMyInstructions,
-  //   pages: [
-  //     "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
-  //     "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
-  //     "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
-  //     "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
-  //     "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
-  //     "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
-  //     symbol_L: " ",
-  //     symbol_R: " "
-  // }
+  const instructions_03 = {
+    type: jsPsychMyInstructions,
+    pages: [
+      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
+      "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
+      "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
+      "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
+      "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
+      "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
+      symbol_L: " ",
+      symbol_R: " "
+  }
 
-  // var comprehension = {
-  //   type: jsPsychComprehension
-  // }
+  var comprehension = {
+    type: jsPsychComprehension
+  }
 
   // Define comprehension threshold.
   var max_errors = 0;
@@ -195,16 +193,16 @@ function buildTimeline(jsPsych) {
   var instructions = {
     timeline: [
       instructions_00, 
-      // pain_01,
-      // pain_02,
-      // pain_03,
-      // pain_04,
-      // instructions_01,
-      // practice_block_01,
-      // instructions_02,
-      // practice_block_02,
-      // instructions_03,
-      // comprehension
+      pain_01,
+      pain_02,
+      pain_03,
+      pain_04,
+      instructions_01,
+      practice_block_01,
+      instructions_02,
+      practice_block_02,
+      instructions_03,
+      comprehension
     ],
   // }
     loop_function: function(data) {
@@ -229,13 +227,13 @@ function buildTimeline(jsPsych) {
     }
   }
 
-  // var comprehension_check = {
-  //   type: jsPsychCallFunction,
-  //   func: function(){},
-  //   on_finish: function() {
-  //     if (low_quality) { jsPsych.endExperiment(); }
-  //   }
-  // }
+  var comprehension_check = {
+    type: jsPsychCallFunction,
+    func: function(){},
+    on_finish: function() {
+      if (low_quality) { jsPsych.endExperiment(); }
+    }
+  }
 
   var ready = {
     type: jsPsychInstructions,
@@ -876,7 +874,7 @@ function buildTimeline(jsPsych) {
 
   timeline = timeline.concat(fullscreen);
   timeline = timeline.concat(instructions);
-  // timeline = timeline.concat(comprehension_check); 
+  timeline = timeline.concat(comprehension_check); 
   timeline = timeline.concat(ready);
   timeline = timeline.concat(learning_phase_1);
   timeline = timeline.concat(instructions_05);
