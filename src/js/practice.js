@@ -188,25 +188,6 @@ trial(display_element, trial) {
   new_html += '</div>';
 
 
-  // jsPsych.pluginAPI.setTimeout(function() {
-  //   display_element.querySelector('#jspsych-pre-coin1').style.visibility = 'hidden';
-  //   display_element.innerHTML = '<img id="jspsych-pre-coin2" class="jspsych-pre-coin" src="mask.jpg"></img>';
-  //   second_change();
-  // }, 1000);
-
-
-  // var fixation = {
-  //   type: 'html-keyboard-response',
-  //   stimulus: '<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>',
-  //   choices: "NO_KEYS",
-  //   trial_duration: 500,
-  // };
-  
-  // this.jsPsych.pluginAPI.setTimeout(function() {
-  //   fixation();
-  // }, trial.context_duration);
-
-
   // draw
   display_element.innerHTML = new_html;
 

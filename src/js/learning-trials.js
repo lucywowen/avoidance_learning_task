@@ -56,6 +56,12 @@ const info = {
         pretty_name: 'Condition',
         description: 'Win or lose condition'
       },
+      context_duration: {
+        type: ParameterType.INT,
+        pretty_name: 'Context duration',
+        default: 500,
+        description: 'Duration of context.'
+      },
       choice_duration: {
         type:  ParameterType.INT,
         pretty_name: 'Trial duration',
@@ -124,84 +130,92 @@ class LearningPlugin {
     desert_4: images['desert_4.jpg'],
   }
 
-    var new_html = '';
+  var new_html = '';
 
-    // Insert CSS (window animation).
-    new_html += `<style>
-    body {
-      height: 100vh;
-      max-height: 100vh;
-      overflow: hidden;
-      position: fixed;
-    }
-    .jspsych-content-wrapper {
-      background: #606060;
-      z-index: -1;
-    }
-    </style>`;
+  // Insert CSS (window animation).
+  new_html += `<style>
+  body {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    position: fixed;
+  }
+  .jspsych-content-wrapper {
+    background: #606060;
+    z-index: -1;
+  }
+  </style>`;
 
-    // Draw task
-    new_html += '<div class="wrap">';
-
-
-    // Draw background.
-    new_html += `<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>`;
-
-    // Draw screens
-    new_html += '<div class="screen" side="left"><div class="screen-msg" id="screenL"></div></div>';
-    new_html += '<div class="screen" side="right"><div class="screen-msg" id="screenR"></div></div>';
-
-    // Draw platforms
-    new_html += '<div class="platform" id="platformL" side="left"></div>';
-    new_html += '<div class="ring" id="ringL" side="left"></div>';
-    new_html += '<div class="platform" id="platformR" side="right"></div>';
-    new_html += '<div class="ring" id="ringR" side="right"></div>';
-
-    // Draw left robot.
-    new_html += '<div class="robot" side="left">';
-    new_html += '<div class="head", id="headL" >';
-    new_html += '<div class="visor", id="visorL"></div>';
-    new_html += '<div class="eye" id="eyeLL" side="left"></div>';
-    new_html += '<div class="eye" id="eyeLR" side="right"></div>';
-    new_html += '</div>';
-    new_html += '<div class="torso">';
-    new_html += '<div class="left"></div>';
-    new_html += '<div class="right"></div>';
-    new_html += `<div class="rune" id="runeL">${trial.symbol_L}</div>`;
-    new_html += '</div>';
-    new_html += '<div class="shado"></div>'
-    new_html += '</div>';
-
-    // Draw right robot.
-    new_html += '<div class="robot" side="right">';
-    new_html += '<div class="head", id="headR">';
-    new_html += '<div class="visor", id="visorR"></div>';
-    new_html += '<div class="eye" id="eyeRL" side="left"></div>';
-    new_html += '<div class="eye" id="eyeRR" side="right"></div>';
-    new_html += '</div>';
-    new_html += '<div class="torso">';
-    new_html += '<div class="left"></div>';
-    new_html += '<div class="right"></div>';
-    new_html += `<div class="rune" id="runeR">${trial.symbol_R}</div>`;
-    new_html += '</div>';
-    new_html += '<div class="shado"></div>'
-    new_html += '</div>';
-
-    // // Draw buttons
-    // new_html += "<div class='leanring-choice'>";
-    // new_html += "<button id='right' class='jspsych-btn' style='margin-right: 5px;'>Left &gt; Prev</button>";
-    // new_html += "<button id='left' class='jspsych-btn' style='margin-left: 5px;'>Left &gt;</button></div>";
+  // Draw task
+  new_html += '<div class="wrap">';
 
 
-    new_html += '</div>';
+  // Draw background.
+  new_html += `<div class="landscape-sky" style="background: url(${background_images[trial.context]}) repeat top center"</div>`;
 
-    // draw
-    display_element.innerHTML = new_html;
+  new_html += '</div>';
+  // draw
+  display_element.innerHTML = new_html;
 
-    const code = eventCodes.display;
-    pdSpotEncode(code);
-    trial.display_code = code;
+  const code = eventCodes.fixation;
+  pdSpotEncode(code);
+  trial.display_code = code;
+    
+  var present_stimuli = () =>  {
 
+      // Draw screens
+      new_html += '<div class="screen" side="left"><div class="screen-msg" id="screenL"></div></div>';
+      new_html += '<div class="screen" side="right"><div class="screen-msg" id="screenR"></div></div>';
+
+      // Draw platforms
+      new_html += '<div class="platform" id="platformL" side="left"></div>';
+      new_html += '<div class="ring" id="ringL" side="left"></div>';
+      new_html += '<div class="platform" id="platformR" side="right"></div>';
+      new_html += '<div class="ring" id="ringR" side="right"></div>';
+
+      // Draw left robot.
+      new_html += '<div class="robot" side="left">';
+      new_html += '<div class="head", id="headL" >';
+      new_html += '<div class="visor", id="visorL"></div>';
+      new_html += '<div class="eye" id="eyeLL" side="left"></div>';
+      new_html += '<div class="eye" id="eyeLR" side="right"></div>';
+      new_html += '</div>';
+      new_html += '<div class="torso">';
+      new_html += '<div class="left"></div>';
+      new_html += '<div class="right"></div>';
+      new_html += `<div class="rune" id="runeL">${trial.symbol_L}</div>`;
+      new_html += '</div>';
+      new_html += '<div class="shado"></div>'
+      new_html += '</div>';
+
+      // Draw right robot.
+      new_html += '<div class="robot" side="right">';
+      new_html += '<div class="head", id="headR">';
+      new_html += '<div class="visor", id="visorR"></div>';
+      new_html += '<div class="eye" id="eyeRL" side="left"></div>';
+      new_html += '<div class="eye" id="eyeRR" side="right"></div>';
+      new_html += '</div>';
+      new_html += '<div class="torso">';
+      new_html += '<div class="left"></div>';
+      new_html += '<div class="right"></div>';
+      new_html += `<div class="rune" id="runeR">${trial.symbol_R}</div>`;
+      new_html += '</div>';
+      new_html += '<div class="shado"></div>'
+      new_html += '</div>';
+
+      new_html += '</div>';
+      // draw
+      display_element.innerHTML = new_html;
+
+      const code = eventCodes.display;
+      pdSpotEncode(code);
+      trial.display_code = code;
+
+  }
+
+    this.jsPsych.pluginAPI.setTimeout(function() {
+      present_stimuli();
+    }, trial.context_duration);
 
     //---------------------------------------//
     // Task functions.
