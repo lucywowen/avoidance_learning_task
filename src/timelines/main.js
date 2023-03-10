@@ -55,8 +55,7 @@ function buildTimeline(jsPsych) {
   context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_2_array, 1));
 
-  console.log(context_array)
-
+  var debug = true
   
   // Define missed repsonses count.
   var missed_threshold = 10;
@@ -189,43 +188,54 @@ function buildTimeline(jsPsych) {
   var max_loops = 3;
   var num_loops = 0;
 
+  if (debug){
+    var instructions = {
+      timeline: [
+        instructions_00
+      ],
+    };
+  }
+  else { 
+    instructions = {
+      timeline: [
+        instructions_00, 
+        pain_01,
+        pain_02,
+        pain_03,
+        pain_04,
+        instructions_01,
+        practice_block_01,
+        instructions_02,
+        practice_block_02,
+        instructions_03,
+        comprehension
+      ],
 
-  var instructions = {
-    timeline: [
-      instructions_00, 
-      pain_01,
-      pain_02,
-      pain_03,
-      pain_04,
-      instructions_01,
-      practice_block_01,
-      instructions_02,
-      practice_block_02,
-      instructions_03,
-      comprehension
-    ],
-  // }
-    loop_function: function(data) {
+    // }
+      loop_function: function(data) {
 
-      // Extract number of errors.
-      const num_errors = data.values().slice(-1)[0].num_errors;
+        // Extract number of errors.
+        const num_errors = data.values().slice(-1)[0].num_errors;
 
-      // Check if instructions should repeat.
-      if (num_errors > max_errors) {
-        console.log(num_errors)
-        num_loops++;
-        if (num_loops >= max_loops) {
-          low_quality = true;
+        // Check if instructions should repeat.
+        if (num_errors > max_errors) {
+          console.log(num_errors)
+          num_loops++;
+          if (num_loops >= max_loops) {
+            low_quality = true;
+            return false;
+          } else {
+            return true;
+          }
+        } 
+        else {
           return false;
-        } else {
-          return true;
         }
-      } else {
-        return false;
-      }
 
+      }
     }
   }
+
 
   var comprehension_check = {
     type: jsPsychCallFunction,
