@@ -383,4 +383,3 @@ class LearningPlugin {
   LearningPlugin.info = info;
 
   export default LearningPlugin;
-

@@ -58,9 +58,9 @@ const info = {
   }
 
 /**
-   * **learning-trials**
+   * **probe-trials**
    *
-   * jsPsych plugin for learning trial
+   * jsPsych plugin for probe trials
    *
    * @author Lucy Owen
    * @see {}
