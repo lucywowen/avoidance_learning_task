@@ -1,5 +1,7 @@
 import { ParameterType } from "jspsych";
 import { images } from '../lib/utils';
+import { eventCodes } from '../config/main'
+import { pdSpotEncode } from '../lib/markup/photodiode'
 
 const info = {
     name: 'probe',
@@ -148,10 +150,16 @@ class ProbePlugin {
     // draw
     display_element.innerHTML = new_html;
 
+    // trigger for stimulus draw
+    const code = eventCodes.display;
+    pdSpotEncode(code);
+    trial.display_code = code;
+
     // store response
     var response = {
       rt: null,
-      key: null
+      key: null,
+      code: null,
     };
 
     // function to handle responses by the subject
@@ -160,6 +168,11 @@ class ProbePlugin {
       // Kill any timeout handlers / keyboard listeners
       this.jsPsych.pluginAPI.clearAllTimeouts();
       this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+
+      // record responses trigger response
+      const code = eventCodes.response;
+      pdSpotEncode(code);
+      response.code = code;
 
       // record responses
       response.rt = info.rt;
@@ -213,6 +226,8 @@ class ProbePlugin {
         "symbol_L": trial.symbol_L,
         "symbol_R": trial.symbol_R,
         "rt": response.rt,
+        "response_code":response.code,
+        "display_code":trial.display_code,
         "stimulus": trial.stimulus,
         "key_press": response.key,
         "context": trial.context,
