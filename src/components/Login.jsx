@@ -44,7 +44,7 @@ function Login({ onLogin, envParticipantId, envStudyId, validationFunction }) {
         ) : null}
         <Form className="centered-h-v" onSubmit={handleSubmit}>
           <Form.Group className="width-100" size="lg" controlId="participantId">
-            <Form.Label>Participant ID</Form.Label>
+            <Form.Label>App ID</Form.Label>
             <Form.Control
               autoFocus
               type="participantId"
