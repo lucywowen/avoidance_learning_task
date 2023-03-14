@@ -11,8 +11,6 @@ import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
-import { eventCodes } from '../config/main'
-import { pdSpotEncode } from '../lib/markup/photodiode'
 
 // Add your jsPsych options here.
 // Honeycomb will combine these custom options with other options needed by Honyecomb.
