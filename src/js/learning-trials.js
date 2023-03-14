@@ -322,6 +322,10 @@ class LearningPlugin {
       this.jsPsych.pluginAPI.clearAllTimeouts();
       this.jsPsych.pluginAPI.cancelAllKeyboardResponses();
 
+      const code = eventCodes.missed;
+      pdSpotEncode(code);
+      trial.missed_code = code;
+
       // Display warning message.
       const msg = '<p style="font-size: 20px; line-height: 1.5em">You did not respond within the allotted time. Please pay more attention next time.<br><br><b>Warning:</b> If you miss too many times, we may end the exepriment early.';
 
@@ -346,6 +350,7 @@ class LearningPlugin {
         "probs": trial.probs,
         "response_code":response.code,
         "display_code":trial.display_code,
+        "missed_code":trial.missed_code,
         "feedback_code":trial.feedback_code,
         "counterfactual":trial.counterfactual,
         "choice": response.key,

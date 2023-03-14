@@ -428,7 +428,6 @@ trial(display_element, trial) {
     persist: false,
     allow_held_key: false
   });
-
 }
 }
 

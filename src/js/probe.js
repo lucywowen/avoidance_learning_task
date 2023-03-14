@@ -205,6 +205,10 @@ class ProbePlugin {
       this.jsPsych.pluginAPI.clearAllTimeouts();
       this.jsPsych.pluginAPI.cancelAllKeyboardResponses();
 
+      const code = eventCodes.missed;
+      pdSpotEncode(code);
+      trial.missed_code = code;
+      
       // Display warning message.
       const msg = '<p style="font-size: 20px; line-height: 1.5em">You did not respond within the allotted time. Please pay more attention on the next trial.<br><br><b>Warning:</b> If you miss too many trials, we may end the exepriment early and reject your work.';
 
@@ -228,6 +232,7 @@ class ProbePlugin {
         "rt": response.rt,
         "response_code":response.code,
         "display_code":trial.display_code,
+        "missed_code":trial.missed_code,
         "stimulus": trial.stimulus,
         "key_press": response.key,
         "context": trial.context,

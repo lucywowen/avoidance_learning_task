@@ -13,7 +13,7 @@ const eventCodes = {
 	response: 2,
 	feedback: 3,
 	fixation: 5,
-	non_fixation: 6,
+	missed: 6,
 	open_task: 11
 }
 
