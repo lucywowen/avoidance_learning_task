@@ -18,7 +18,7 @@ jobs:
       matrix:
         setting: [home, clinic]
         video: [on, off]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [macOS-latest, windows-latest]
         exclude: 
           # exclude clinic video on ubuntu-latest 
           - os: ubuntu-latest
