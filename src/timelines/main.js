@@ -516,6 +516,7 @@ function buildTimeline(jsPsych) {
 
         if (p != q) {
 
+          
           // Append trial.
           var probe = {
             type: jsPsychProbe,
