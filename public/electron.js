@@ -217,7 +217,7 @@ ipc.on('data', (event, args) => {
   console.log(fileCreated)
 
   // initialize file - we got a participant_id to save the data to
-  if (args.participant_id && args.study_id && !fileCreated) {
+  if (args.participant_id && args.study_id && preSavePath === '') {
     const dir = app.getPath('userData')
     participantID = args.participant_id
     studyID = args.study_id
