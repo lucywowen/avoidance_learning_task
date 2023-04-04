@@ -8,9 +8,11 @@ import jsPsychPractice from '../js/practice'
 import jsPsychHtmlSliderResponse from '@jspsych/plugin-html-slider-response'
 import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
 import jsPsychCallFunction from '@jspsych/plugin-call-function'
+import jsPsychImageKeyboardResponse from '@jspsych/plugin-image-keyboard-response';
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
+import { images } from '../lib/utils';
 
 // Add your jsPsych options here.
 // Honeycomb will combine these custom options with other options needed by Honyecomb.
@@ -54,7 +56,7 @@ function buildTimeline(jsPsych) {
   context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_2_array, 1));
 
-  var debug = true
+  var debug = false
   
   // Define missed repsonses count.
   var missed_threshold = 10;
@@ -71,33 +73,47 @@ function buildTimeline(jsPsych) {
   // Define counterfactual
   var cf = true;
 
+
   //---------------------------------------//
   // Define learning phase instructions.
   //---------------------------------------//
 
+  var instructions_0000 = {
+    type: jsPsychInstructions,
+    pages: [
+      "Welcome to the experiment.",
+    ],
+  }
+
+  var instructions_000 = {
+    type: jsPsychImageKeyboardResponse,
+    stimulus: images['keyboard.png'],
+    prompt: "<p>Press the Left and Right arrow keys to continue.</p>",
+  };
+
   var instructions_00 = {
     type: jsPsychInstructions,
     pages: [
-      "Welcome to the experiment.  Press the Left and Right arrow keys to continue.",
       "We are first going to start with a few questions about your pain levels.",
     ],
   }
+  
   var pain_01 = {
     type: jsPsychHtmlSliderResponse,
-    labels: ['worst imaginable', 'no pain'],
+    labels: ['no pain', 'worst imaginable'],
     stimulus: "<p>Averaged over the past week, how intense is your pain?</p>",
   };
 
   var pain_02 = {
     type: jsPsychHtmlSliderResponse,
-    labels: ['worst imaginable', 'no pain'],
+    labels: ['no pain', 'worst imaginable'],
     stimulus: "<p>Averaged over the past week, how unpleasant is your pain?</p>",
   };
 
     var pain_03 = {
       type: jsPsychHtmlSliderResponse,
-      labels: ['worst imaginable', 'no pain'],
-      stimulus: "<p>How much has your pain interfered with your activities over the past week?</p>",
+      labels: ['no pain', 'worst imaginable'],
+      stimulus: "<p>How much has your pain interfered with your activities <br> over the past week?</p>",
   };
 
     var pain_04 = {
@@ -107,7 +123,7 @@ function buildTimeline(jsPsych) {
           prompt: "How long have you been in pain?",
           name: 'Pain Duration', 
           options: ['I am not in pain', '< 2 weeks', '2-4 weeks', '1 – 3 months', '3 – 6 months', 
-          '6 – 12 months', '1 – 5 years1', '> 5 years', '> 10 years'], 
+          '6 – 12 months', '1 – 5 years', '> 5 years', '> 10 years'], 
           required: true
         }
       ],
@@ -120,13 +136,13 @@ function buildTimeline(jsPsych) {
       "We are now starting the experiment.<br><br>Use the left/right arrow keys to navigate the instructions.",
       "In this task, you are picking a team of knights.<br>The knights will look like the ones below.",
       "Each knight will have a <b>unique symbol</b> on its chestplate.<br>This symbol will help you identify each knight.",
-      "You'll also pick your team of knights from different places, either the desert or forrest.",
+      "You'll also pick your team of knights from different places, either the desert or forest.",
       "On every turn, you will choose a knight for your team.<br>When you select a knight, it may give you:<br><b><font color=#01579b>+10 points, </font><font color=#303030>+0 points</font></b>, or <b><font color=#A41919>-10 points</font></b>.",
       "Once you've selected your knight, their platform and visor will light up to indicate your choice.",
-      "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you choose.",
-      "Some knights are better than others. Some will give you more points than others and some will lose you less points than others.",
+      "To help you learn, we will also show you the points you<br><i>could have earned</i> if you had chosen the other knight.<br><b>NOTE:</b> You will earn points only for the knight you chose.",
+      "Some knights are better than others. Some will gain points while others will avoid losing points. Try to earn as many points as you can.",
       "Now let's practice with the knights below. Using the left/right<br>arrow keys, select the knights for testing and try to learn<br>which will give you more points.",
-      "<b>HINT:</b> Pay attention to the symbols and the results of each test."
+      "<b>HINT:</b> You can differentiate between the knights based on the symbols on their chestplate.  Try to avoid losing points."
     ],
     symbol_L: "V",
     symbol_R: "U",
@@ -168,12 +184,12 @@ function buildTimeline(jsPsych) {
   const instructions_03 = {
     type: jsPsychMyInstructions,
     pages: [
-      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols.",
+      "During the task, there will be many different knights to choose from.<br>Remember to pay close attention to their symbols on their chestplates.",
       "Your job is to try to select the best knight in each pair.<br>Even though you will learn the outcomes for both knights,<br>you will only earn points for the knight you choose.",
-      "<b>HINT:</b> The knights may not always give you points, but some knights will give you points and others will lose you points more often than others.",
+      "<b>HINT:</b> The knights may not always give you points, but some knights are better at gaining points while other knights are better at avoiding losing points.",
       "You should try to earn as many points as you can, even if it's not possible to win points or avoid losing points on every round.",
-      "At the end of the task, the total number of points you've earned will be converted into a performance bonus.",
-      "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to continue."],
+      "At the end of the task, the total number of points you've earned will be converted into a performance percentage. You can earn up to an additional $4 based on your performance.",
+      "Next, we will ask you some questions about the task.<br>You must answer all the questions correctly to be able to continue."],
       symbol_L: " ",
       symbol_R: " "
   }
@@ -197,6 +213,8 @@ function buildTimeline(jsPsych) {
   else { 
     instructions = {
       timeline: [
+        instructions_0000,
+        instructions_000,
         instructions_00, 
         pain_01,
         pain_02,
@@ -248,7 +266,7 @@ function buildTimeline(jsPsych) {
     type: jsPsychInstructions,
     pages: [
       "Great job! You've passed the comprehension check.",
-      "Get ready to begin the experiment.<br>Press next when you're ready to start.",
+      "Get ready to begin the experiment.<br>Press the right arrow key when you're ready to start.",
     ],
   }
 
@@ -260,8 +278,8 @@ function buildTimeline(jsPsych) {
     type: jsPsychInstructions,
     pages: () => {
       return [
-        `That's the end of the learning phase. Great job! You've made ${correct_trial_count/total_trial_count}% correct`,
-        "In this next part, you will select which knights you would like to join your team.",
+        `That's the end of the learning phase. Great job! You've made ${Math.round(correct_trial_count/total_trial_count*100)}% correct`,
+        "In this next part, you will see the same knights as before, but they will be shown in new pair combinations. <br>Again, your job will be to select the knight you would like to join your team.",
         "As you make your choices, you will not receive any feedback after your choice.",
         "You should still choose the knight you think is better on each trial.<br>Your choices will still contribute to your performance bonus.",
         "Get ready to make your selections.<br><br>Choose wisely!"
@@ -516,7 +534,7 @@ function buildTimeline(jsPsych) {
 
         if (p != q) {
 
-          
+
           // Append trial.
           var probe = {
             type: jsPsychProbe,
