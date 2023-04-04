@@ -96,9 +96,9 @@ const info = {
   }
 }
 /**
- * **learning-trials**
+ * **practice-trials**
  *
- * jsPsych plugin for learning trial
+ * jsPsych plugin for practice trial
  *
  * @author Lucy Owen
  * @see {}
@@ -428,7 +428,6 @@ trial(display_element, trial) {
     persist: false,
     allow_held_key: false
   });
-
 }
 }
 

@@ -211,14 +211,20 @@ ipc.on('syncCredentials', (event) => {
 // listener for new data
 ipc.on('data', (event, args) => {
 
+  log.info(args)
+  console.log(args)
+  log.info(fileCreated)
+  console.log(fileCreated)
+
   // initialize file - we got a participant_id to save the data to
-  if (args.participant_id && args.study_id && !fileCreated) {
+  if (args.participant_id && args.study_id && preSavePath === '') {
     const dir = app.getPath('userData')
     participantID = args.participant_id
     studyID = args.study_id
     preSavePath = path.resolve(dir, `pid_${participantID}_${today.getTime()}.json`)
     startTrial = args.trial_index
-    log.warn(preSavePath)
+    log.info(preSavePath)
+    console.log(preSavePath)
     stream = fs.createWriteStream(preSavePath, {flags:'ax+'});
     stream.write('[')
     fileCreated = true
