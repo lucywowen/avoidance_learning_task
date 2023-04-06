@@ -24,7 +24,19 @@ const jsPsychOptions = {
       data.value='replacement';
     }
     if (typeof data.subject_id == 'undefined') {
-      data.value='replacement';
+      data.subject_id='replacement';
+    }
+    if (typeof data.missed_code == 'undefined') {
+      data.missed_code='replacement';
+    }
+    if (typeof data.display_code == 'undefined') {
+      data.display_code='replacement';
+    }
+    if (typeof data.response_code == 'undefined') {
+      data.response_code='replacement';
+    }
+    if (typeof data.feedback_code == 'undefined') {
+      data.feedback_code='replacement';
     }
     console.log(data)
   }
