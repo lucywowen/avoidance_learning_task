@@ -990,7 +990,7 @@ function buildTimeline(jsPsych) {
     type: jsPsychInstructions,
     pages: () => {
       return [
-        `Great job! You have completed the experiment. You've made ${correct_trial_count/total_trial_count}% correct`,
+        '<p style="font-size:'+font_size+'px;">Great job! You have completed the experiment. You have made '+Math.round(correct_trial_count/total_trial_count*100)+'% correct',
     ]},
     show_clickable_nav: true,
     button_label_previous: 'Prev',
