@@ -388,11 +388,11 @@ function buildTimeline(jsPsych) {
     type: jsPsychInstructions,
     pages: () => {
       return [
-        `That's the end of the learning phase. Great job! You've made ${Math.round(correct_trial_count/total_trial_count*100)}% correct`,
-        "In this next part, you will see the same knights as before, but they will be shown in new pair combinations. <br>Again, your job will be to select the knight you would like to join your team.",
-        "As you make your choices, you will not receive any feedback after your choice.",
-        "You should still choose the knight you think is better on each trial.<br>Your choices will still contribute to your performance bonus.",
-        "Get ready to make your selections.<br><br>Choose wisely!"
+        '<p style="font-size:'+font_size+'px;">That is the end of the learning phase. Great job! You have made '+Math.round(correct_trial_count/total_trial_count*100)+'% correct',
+        '<p style="font-size:'+font_size+'px;">In this next part, you will see the same knights as before, but they will be shown in new pair combinations. <br>Again, your job will be to select the knight you would like to join your team.',
+        '<p style="font-size:'+font_size+'px;">As you make your choices, you will not receive any feedback after your choice.',
+        '<p style="font-size:'+font_size+'px;">You should still choose the knight you think is better on each trial.<br>Your choices will still contribute to your performance bonus.',
+        '<p style="font-size:'+font_size+'px;">Get ready to make your selections.<br><br>Choose wisely!'
       ]
     }
   }
@@ -402,10 +402,10 @@ function buildTimeline(jsPsych) {
 
     pages: () => {
       return [
-        "That's the end of the selection phase. Great job!",
-        "Take a break for a few moments and<br>click next when you are ready to continue.",
-        "Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.",
-        "Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.",
+        '<p style="font-size:'+font_size+'px;">That is the end of the selection phase. Great job!',
+        '<p style="font-size:'+font_size+'px;">Take a break for a few moments and<br>click next when you are ready to continue.',
+        '<p style="font-size:'+font_size+'px;">Great! You are now going to <b>test</b> a new set of knights.<br>The task is the same as before.',
+        '<p style="font-size:'+font_size+'px;">Remember to pay close attention to the symbol on each knight<br>and try to earn as many points as you can.',
       ]
     }
   }
@@ -433,13 +433,25 @@ function buildTimeline(jsPsych) {
   var diff_arr_1;
   var diff_arr_2;
   var reward_prob;
+  var iters;
+  var probe_iters;
+  var context_iters
 
-
+  if (debug){
+    iters = 2;
+    probe_iters = 3;
+    context_iters = 1;
+  }
+  else { 
+    iters = 12;
+    probe_iters = 9;
+    context_iters = 3;
+  }
 
 
   // Iteratively define trials
   // for (var i = 0; i < 2; i++) {
-  for (var i = 0; i < 12; i++) {
+  for (var i = 0; i < iters; i++) {
 
     // const code = eventCodes.fixation;
 
@@ -629,18 +641,18 @@ function buildTimeline(jsPsych) {
   // (28 in total) presented 4 times
   // (112 total trials). Each presented 3 times 
   // either neutral (gray) background or 
-  // 2 other contexts (reward or punishment).
+  // 2 other contexts (reward or punishment) (336 trials total).
 
   // Initialize phase array.
   var probe_phase_1 = [];
   // Iteratively define trials
   // for (i = 0; i < 8; i++) {
-  for (var p = 0; p < 9; p++) {
+  for (var p = 0; p < probe_iters; p++) {
 
     // for (j = 0; j < 8; j++) {
-    for (var q = 0; q < 9; q++) {
+    for (var q = 0; q < probe_iters; q++) {
 
-      for (var c = 0; c < 3; c++) {
+      for (var c = 0; c < context_iters; c++) {
 
         if (p != q) {
 
@@ -713,13 +725,9 @@ function buildTimeline(jsPsych) {
 
   // Initialize phase array.
   var learning_phase_2 = [];
-  // var low_quality_2;
-  // var val_2;
-  // var color_2;
 
   // Iteratively define trials
-  // for (i = 0; i < 12; i++) {
-  for (var n = 0; n < 12; n++) {
+  for (var n = 0; n < iters; n++) {
 
     // Initialize (temporary) trial array.
     const trials = [];
@@ -728,13 +736,13 @@ function buildTimeline(jsPsych) {
     for (var m = 4; m < 8; m++) {
     // for (j = 4; j < 8; j++) {
 
-        // Define metadata.
+      // Define metadata.
 
         reduced_a = reduce(reward_probs_a*100, 100);
         diff_a = reduced_a[1] - reduced_a[0];
         reduced_b = reduce(reward_probs_b*100, 100);
         diff_b = reduced_b[1] - reduced_b[0];
-  
+
         if (j == 0) { 
           val = 'win'; 
           arr_1 = Array(reduced_a[0]).fill('zero');
@@ -780,14 +788,6 @@ function buildTimeline(jsPsych) {
           color = context_array[4];
         }
 
-      // // Define metadata.
-      // if (j % 2 == 0) { var val = 'win'; }
-      // else { var val = 'lose'; }
-
-      // if (val = 'lose') { var color = 'reward'; }
-      // else { var color = 'punish'; }
-
-
       // If you want to take away counterfactuals half time
       // if (j == 1) { var cf = false;} 
       // else if (j == 3) { var cf = false;}
@@ -799,6 +799,7 @@ function buildTimeline(jsPsych) {
         symbol_R: symbol_array[2*m+1],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
+        probs: reward_prob,
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
@@ -849,6 +850,7 @@ function buildTimeline(jsPsych) {
         symbol_R: symbol_array[2*m+0],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
+        probs: reward_prob,
         counterfactual: cf,
         context:color,
         choices: ['arrowleft','arrowright'],
