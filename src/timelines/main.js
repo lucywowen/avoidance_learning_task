@@ -752,7 +752,7 @@ function buildTimeline(jsPsych) {
           diff_arr_2 = Array(diff_a).fill('zero');
           arr_2 = arr_2.concat(diff_arr_2);  
           reward_prob = reward_probs_a;   
-          color = context_array[3];
+          color = context_array[6];
         }
         else if (j == 1) {
           val = 'lose'; 
@@ -763,7 +763,7 @@ function buildTimeline(jsPsych) {
           diff_arr_2 = Array(diff_a).fill('zero');
           arr_2 = arr_2.concat(diff_arr_2); 
           reward_prob = reward_probs_a;    
-          color = context_array[4];
+          color = context_array[7];
         }
         else if (j == 2) {
           val = 'win'; 
@@ -774,7 +774,7 @@ function buildTimeline(jsPsych) {
           diff_arr_2 = Array(diff_b).fill('zero');
           arr_2 = arr_2.concat(diff_arr_2);
           reward_prob = reward_probs_b; 
-          color = context_array[3];
+          color = context_array[6];
         }
         else { 
           val = 'lose'; 
@@ -785,7 +785,7 @@ function buildTimeline(jsPsych) {
           diff_arr_2 = Array(diff_b).fill('zero');
           arr_2 = arr_2.concat(diff_arr_2);
           reward_prob = reward_probs_b;  
-          color = context_array[4];
+          color = context_array[7];
         }
 
       // If you want to take away counterfactuals half time
