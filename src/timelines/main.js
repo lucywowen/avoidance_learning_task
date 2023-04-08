@@ -70,7 +70,7 @@ function buildTimeline(jsPsych) {
   context_array = context_array.concat(['gray'])
   context_array = context_array.concat(jsPsych.randomization.repeat(learn_2_array, 1));
 
-  var debug = false
+  var debug = true
   
   // Define missed repsonses count.
   var missed_threshold = 10;
@@ -743,7 +743,7 @@ function buildTimeline(jsPsych) {
         reduced_b = reduce(reward_probs_b*100, 100);
         diff_b = reduced_b[1] - reduced_b[0];
 
-        if (j == 0) { 
+        if (m == 0) { 
           val = 'win'; 
           arr_1 = Array(reduced_a[0]).fill('zero');
           diff_arr_1 = Array(diff_a).fill(val);
@@ -754,7 +754,7 @@ function buildTimeline(jsPsych) {
           reward_prob = reward_probs_a;   
           color = context_array[6];
         }
-        else if (j == 1) {
+        else if (m == 1) {
           val = 'lose'; 
           arr_1 = Array(reduced_a[0]).fill('zero');
           diff_arr_1 = Array(diff_a).fill(val);
@@ -765,7 +765,7 @@ function buildTimeline(jsPsych) {
           reward_prob = reward_probs_a;    
           color = context_array[7];
         }
-        else if (j == 2) {
+        else if (m == 2) {
           val = 'win'; 
           arr_1 = Array(reduced_b[0]).fill('zero');
           diff_arr_1 = Array(diff_b).fill(val);
