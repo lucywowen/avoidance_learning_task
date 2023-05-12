@@ -54,14 +54,18 @@ function buildTimeline(jsPsych) {
 
   // Define unique symbols.
   var symbol_array = ['c','d','e','f','j','k','m','o','x','s','t','y','C','N','O','L','T','X']
-
   // Shuffle symbols.
   symbol_array = jsPsych.randomization.repeat(symbol_array, 1);
+  var symbol_array_1 = symbol_array.slice(0, 9);
+  var symbol_array_2 = symbol_array.slice(9, 18);
 
   // Define the contexts.
   var practice_array = ['forrest_1', 'desert_1']
   var learn_1_array = ['forrest_2', 'desert_4']
   var learn_2_array = ['forrest_4', 'desert_3']
+
+  console.log(symbol_array_1)
+  console.log(symbol_array_2)
 
   // Randomize the contexts.
   var context_array = jsPsych.randomization.repeat(practice_array, 1);
@@ -439,15 +443,19 @@ function buildTimeline(jsPsych) {
 
   if (debug){
     iters = 2;
-    probe_iters = 3;
+    // probe_iters = 3;
     context_iters = 1;
   }
   else { 
-    iters = 12;
+    iters = 1;
     probe_iters = 9;
-    context_iters = 3;
+    context_iters = 1;
   }
-
+  // else { 
+  //   iters = 12;
+  //   probe_iters = 9;
+  //   context_iters = 3;
+  // }
 
   // Iteratively define trials
   // for (var i = 0; i < 2; i++) {
@@ -520,13 +528,15 @@ function buildTimeline(jsPsych) {
       // if (j == 1) { var cf = false;} 
       // else if (j == 3) { var cf = false;}
       // else { var cf = true; }
-
-
+      console.log('learn 1')
+      console.log(symbol_array_1[2*j+1])
+      console.log(symbol_array_1[2*j+0])
+      
       // Append trial (LR).
       var LR = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*j+0],
-        symbol_R: symbol_array[2*j+1],
+        symbol_L: symbol_array_1[2*j+0],
+        symbol_R: symbol_array_1[2*j+1],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         probs: reward_prob,
@@ -577,8 +587,8 @@ function buildTimeline(jsPsych) {
       // Append trial (RL).
       var RL = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*j+1],
-        symbol_R: symbol_array[2*j+0],
+        symbol_L: symbol_array_1[2*j+1],
+        symbol_R: symbol_array_1[2*j+0],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         probs: reward_prob,
@@ -612,6 +622,7 @@ function buildTimeline(jsPsych) {
             }
           }
           console.log(low_quality)
+          
         }
         
       }
@@ -655,13 +666,15 @@ function buildTimeline(jsPsych) {
       for (var c = 0; c < context_iters; c++) {
 
         if (p != q) {
-
+          console.log('probe 1')
+          console.log(symbol_array_1[p])
+          console.log(symbol_array_1[q])
 
           // Append trial.
           var probe = {
             type: jsPsychProbe,
-            symbol_L: symbol_array[p],
-            symbol_R: symbol_array[q],
+            symbol_L: symbol_array_1[p],
+            symbol_R: symbol_array_1[q],
             context: context_array[4-c],
             choices: ['arrowleft','arrowright'],
             data: {block: 1},
@@ -733,7 +746,7 @@ function buildTimeline(jsPsych) {
     const trials = [];
 
     // Iterate over unique pairs.
-    for (var m = 4; m < 8; m++) {
+    for (var m = 0; m < 4; m++) {
     // for (j = 4; j < 8; j++) {
 
       // Define metadata.
@@ -793,10 +806,13 @@ function buildTimeline(jsPsych) {
       // else if (j == 3) { var cf = false;}
       // else { var cf = true; }
       // Append trial (LR).
+      console.log('learn 2')
+      console.log(symbol_array_2[2*m+0])
+      console.log(symbol_array_2[2*m+1])
       LR = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*m+0],
-        symbol_R: symbol_array[2*m+1],
+        symbol_L: symbol_array_2[2*m+0],
+        symbol_R: symbol_array_2[2*m+1],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         probs: reward_prob,
@@ -846,8 +862,8 @@ function buildTimeline(jsPsych) {
       // Append trial (RL).
       RL = {
         type: jsPsychLearning,
-        symbol_L: symbol_array[2*m+1],
-        symbol_R: symbol_array[2*m+0],
+        symbol_L: symbol_array_2[2*m+1],
+        symbol_R: symbol_array_2[2*m+0],
         outcome_L: jsPsych.randomization.sampleWithoutReplacement(arr_1,1)[0],
         outcome_R: jsPsych.randomization.sampleWithoutReplacement(arr_2,1)[0],
         probs: reward_prob,
@@ -921,19 +937,21 @@ function buildTimeline(jsPsych) {
   //   for (s = 8; s < 16; s++) {
 
   // Iteratively define trials
-  for (var r = 9; r < 17; r++) {
+  for (var r = 0; r < probe_iters; r++) {
 
-    for (var s = 9; s < 17; s++) {
+    for (var s = 0; s < probe_iters; s++) {
 
       for (var d = 0; d < 3; d++) {
 
         if (r != s) {
-
+          console.log('probe 2')
+          console.log(symbol_array_2[r])
+          console.log(symbol_array_2[s])
           // Append trial.
           probe = {
             type: jsPsychProbe,
-            symbol_L: symbol_array[r],
-            symbol_R: symbol_array[s],
+            symbol_L: symbol_array_2[r],
+            symbol_R: symbol_array_2[s],
             context: context_array[7-d],
             choices: ['arrowleft','arrowright'],
             data: {block: 2},
