@@ -442,14 +442,10 @@ function buildTimeline(jsPsych) {
 
   if (debug){
     iters = 2;
-    // probe_iters = 3;
+    probe_iters = 3;
     context_iters = 1;
   }
-  // else { 
-  //   iters = 1;
-  //   probe_iters = 9;
-  //   context_iters = 1;
-  // }
+
   else { 
     iters = 12;
     probe_iters = 9;
@@ -527,9 +523,6 @@ function buildTimeline(jsPsych) {
       // if (j == 1) { var cf = false;} 
       // else if (j == 3) { var cf = false;}
       // else { var cf = true; }
-      console.log('learn 1')
-      console.log(symbol_array_1[2*j+1])
-      console.log(symbol_array_1[2*j+0])
 
       // Append trial (LR).
       var LR = {
@@ -665,9 +658,6 @@ function buildTimeline(jsPsych) {
       for (var c = 0; c < context_iters; c++) {
 
         if (p != q) {
-          console.log('probe 1')
-          console.log(symbol_array_1[p])
-          console.log(symbol_array_1[q])
 
           // Append trial.
           var probe = {
@@ -805,9 +795,7 @@ function buildTimeline(jsPsych) {
       // else if (j == 3) { var cf = false;}
       // else { var cf = true; }
       // Append trial (LR).
-      console.log('learn 2')
-      console.log(symbol_array_2[2*m+0])
-      console.log(symbol_array_2[2*m+1])
+
       LR = {
         type: jsPsychLearning,
         symbol_L: symbol_array_2[2*m+0],
@@ -943,9 +931,7 @@ function buildTimeline(jsPsych) {
       for (var d = 0; d < 3; d++) {
 
         if (r != s) {
-          console.log('probe 2')
-          console.log(symbol_array_2[r])
-          console.log(symbol_array_2[s])
+
           // Append trial.
           probe = {
             type: jsPsychProbe,
