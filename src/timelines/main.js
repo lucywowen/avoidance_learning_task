@@ -10,7 +10,6 @@ import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice'
 import jsPsychCallFunction from '@jspsych/plugin-call-function'
 import jsPsychImageKeyboardResponse from '@jspsych/plugin-image-keyboard-response';
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
-// import jsPsychExternalHtml from '@jspsych/plugin-external-html';
 import jspsychPluginHtml from '@adp-psych/jspsych-plugin-html';
 import 'jspsych/css/jspsych.css';
 import '../css/robots-css.min.css'
@@ -446,16 +445,16 @@ function buildTimeline(jsPsych) {
     // probe_iters = 3;
     context_iters = 1;
   }
-  else { 
-    iters = 1;
-    probe_iters = 9;
-    context_iters = 1;
-  }
   // else { 
-  //   iters = 12;
+  //   iters = 1;
   //   probe_iters = 9;
-  //   context_iters = 3;
+  //   context_iters = 1;
   // }
+  else { 
+    iters = 12;
+    probe_iters = 9;
+    context_iters = 3;
+  }
 
   // Iteratively define trials
   // for (var i = 0; i < 2; i++) {
@@ -531,7 +530,7 @@ function buildTimeline(jsPsych) {
       console.log('learn 1')
       console.log(symbol_array_1[2*j+1])
       console.log(symbol_array_1[2*j+0])
-      
+
       // Append trial (LR).
       var LR = {
         type: jsPsychLearning,
