@@ -745,7 +745,7 @@ function buildTimeline(jsPsych) {
         reduced_b = reduce(reward_probs_b*100, 100);
         diff_b = reduced_b[1] - reduced_b[0];
 
-        if (m == 4) { 
+        if (m == 0) { 
           val = 'win'; 
           arr_1 = Array(reduced_a[0]).fill('zero');
           diff_arr_1 = Array(diff_a).fill(val);
@@ -756,7 +756,7 @@ function buildTimeline(jsPsych) {
           reward_prob = reward_probs_a;   
           color = context_array[6];
         }
-        else if (m == 5) {
+        else if (m == 1) {
           val = 'lose'; 
           arr_1 = Array(reduced_a[0]).fill('zero');
           diff_arr_1 = Array(diff_a).fill(val);
@@ -767,7 +767,7 @@ function buildTimeline(jsPsych) {
           reward_prob = reward_probs_a;    
           color = context_array[7];
         }
-        else if (m == 6) {
+        else if (m == 2) {
           val = 'win'; 
           arr_1 = Array(reduced_b[0]).fill('zero');
           diff_arr_1 = Array(diff_b).fill(val);
