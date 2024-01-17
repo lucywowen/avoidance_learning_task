@@ -1,27 +1,32 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true
+  env: {
+    browser: true,
+    es2021: true
   },
-  'extends': [
-    'eslint:recommended',
+  extends: [
+    'standard',
     'plugin:react/recommended'
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: [
+        '.eslintrc.{js,cjs}'
+      ],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
-    },
-    'ecmaVersion': 2018,
-    'sourceType': 'module'
-  },
-  'plugins': [
+  plugins: [
     'react'
   ],
-  'rules': {
-    'react/prop-types': 'off'
+  rules: {
   }
 }
